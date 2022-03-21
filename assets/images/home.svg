@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="340" height="128" viewBox="0 0 340 128">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_3114" data-name="Rectangle 3114" width="340" height="128" rx="8" transform="translate(10 10)" fill="#0070b2"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g id="Groupe_8517" data-name="Groupe 8517" transform="translate(-10 -10)">
+    <g id="Groupe_8516" data-name="Groupe 8516">
+      <rect id="Rectangle_3115" data-name="Rectangle 3115" width="340" height="128" rx="8" transform="translate(10 10)" fill="#0070b2"/>
+    </g>
+    <g id="Groupe_de_masques_46" data-name="Groupe de masques 46" clip-path="url(#clip-path)">
+      <g id="Groupe_8514" data-name="Groupe 8514" transform="translate(134 258.971)">
+        <ellipse id="Oval" cx="79" cy="78.5" rx="79" ry="78.5" transform="translate(1 -140.971)" opacity="0.1" fill="url(#linear-gradient)"/>
+        <circle id="Oval_Copy" data-name="Oval Copy" cx="78.5" cy="78.5" r="78.5" transform="translate(104 -160.971)" fill="#fff" opacity="0.1"/>
+        <circle id="Oval_Copy-2" data-name="Oval Copy" cx="55.5" cy="55.5" r="55.5" transform="translate(-152 -310.971)" fill="#fff" opacity="0.1"/>
+      </g>
+    </g>
+  </g>
+</svg>
