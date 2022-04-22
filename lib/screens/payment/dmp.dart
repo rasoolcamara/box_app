@@ -38,13 +38,6 @@ class _DmpPageState extends State<DmpPage> {
     lineWidth: 10.0,
     size: 100.0,
   );
-  // final spinkit = SpinKitCircle(
-  //   itemBuilder: (BuildContext context, int index) {
-  //     return DecoratedBox(
-  //       decoration: BoxDecoration(color: index.isEven ? blue : Colors.black),
-  //     );
-  //   },
-  // );
 
   @override
   Widget build(BuildContext context) {
@@ -270,7 +263,7 @@ class _DmpPageState extends State<DmpPage> {
                                                       textAlign:
                                                           TextAlign.start,
                                                       keyboardType:
-                                                          TextInputType.phone,
+                                                          TextInputType.number,
                                                       autocorrect: false,
                                                       autofocus: false,
                                                       controller:
@@ -498,7 +491,7 @@ class _DmpPageState extends State<DmpPage> {
                                                 ),
                                                 textAlign: TextAlign.start,
                                                 keyboardType:
-                                                    TextInputType.phone,
+                                                    TextInputType.number,
                                                 autocorrect: false,
                                                 autofocus: false,
                                                 controller: _amountController,
@@ -568,149 +561,398 @@ class _DmpPageState extends State<DmpPage> {
                                   ),
                                   child: FlatButton(
                                     onPressed: () async {
-                                      if (num.parse(_amountController.text) <
-                                          num.parse(
-                                              activeApplication.user.balance)) {
-                                        setState(() {
-                                          _loading = true;
-                                        });
-                                        //  var recipient_phone =  _smsSending ? _phoneController.text :_emailController.text;
-                                        // final result =
-                                        //     await apiDMPService.dmpSending(
-                                        //   num.parse(_amountController.text),
-                                        //   email: _emailController.text,
-                                        //   phone: _phoneController.text,
-                                        // );
-
-                                        String alias =
-                                            _emailController.text.isEmpty
-                                                ? _countryCode +
-                                                    _phoneController.text
-                                                : _emailController.text;
-                                        final result =
-                                            await apiDMPService.fastDmpSending(
-                                          num.parse(_amountController.text),
-                                          alias,
-                                          // email: _emailController.text,
-                                          // phone: _phoneController.text,
-                                        );
-                                        setState(() {
-                                          _loading = false;
-                                        });
-                                        if (result != null) {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return Dialog(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ), //this right here
-                                                child: Container(
-                                                  height: 200,
-                                                  width: 320,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            12.0),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Align(
-                                                          child: Icon(
-                                                            Icons.done,
-                                                            color: green,
-                                                            size: 40,
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 16,
-                                                        ),
-                                                        Text(
-                                                          result,
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                "Roboto",
-                                                            fontSize: 16.0,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: Colors.black,
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        ),
-                                                        Align(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                              top: 26.0,
+                                      if (_amountController.text.isNotEmpty &&
+                                          (_emailController.text.isNotEmpty ||
+                                              _phoneController
+                                                  .text.isNotEmpty)) {
+                                        if (num.tryParse(
+                                                    _amountController.text) !=
+                                                null &&
+                                            num.parse(_amountController.text) >
+                                                501) {
+                                          if (num.tryParse(
+                                                      _phoneController.text) !=
+                                                  null ||
+                                              _emailController.text
+                                                  .contains("@")) {
+                                            print("dfsdf");
+                                            setState(() {
+                                              _loading = true;
+                                            });
+                                            String alias =
+                                                _emailController.text.isEmpty
+                                                    ? _countryCode +
+                                                        _phoneController.text
+                                                    : _emailController.text;
+                                            final result = await apiDMPService
+                                                .fastDmpSending(
+                                              num.parse(_amountController.text),
+                                              alias,
+                                              // email: _emailController.text,
+                                              // phone: _phoneController.text,
+                                            );
+                                            setState(() {
+                                              _loading = false;
+                                            });
+                                            if (result != null) {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return Dialog(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                    ), //this right here
+                                                    child: Container(
+                                                      height: 200,
+                                                      width: 320,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(12.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Align(
+                                                              child: Icon(
+                                                                Icons.done,
+                                                                color: green,
+                                                                size: 40,
+                                                              ),
                                                             ),
-                                                            child: FlatButton(
-                                                              onPressed:
-                                                                  () async {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pushReplacement(
-                                                                  MaterialPageRoute(
-                                                                    builder: (_) =>
-                                                                        HomeScreen(),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Container(
+                                                            SizedBox(
+                                                              height: 16,
+                                                            ),
+                                                            Text(
+                                                              result,
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    "Roboto",
+                                                                fontSize: 16.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ),
+                                                            Align(
+                                                              child: Padding(
                                                                 padding:
-                                                                    EdgeInsets
-                                                                        .all(
-                                                                            10.0),
-                                                                height: 40.5,
-                                                                width: 120,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5.0),
-                                                                  color: green
-                                                                      .withOpacity(
-                                                                          0.08),
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                  top: 26.0,
                                                                 ),
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    "Merci",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontSize:
-                                                                          14.0,
+                                                                child:
+                                                                    FlatButton(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pushReplacement(
+                                                                      MaterialPageRoute(
+                                                                        builder:
+                                                                            (_) =>
+                                                                                HomeScreen(),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            10.0),
+                                                                    height:
+                                                                        40.5,
+                                                                    width: 120,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0),
+                                                                      color: green
+                                                                          .withOpacity(
+                                                                              0.08),
+                                                                    ),
+                                                                    child:
+                                                                        Center(
+                                                                      child:
+                                                                          Text(
+                                                                        "Merci",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              14.0,
+                                                                          color:
+                                                                              green,
+                                                                          fontWeight:
+                                                                              FontWeight.w600,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            } else {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return Dialog(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                    ), //this right here
+                                                    child: Container(
+                                                      height: 200,
+                                                      width: 320,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(12.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Align(
+                                                              child: Icon(
+                                                                Icons
+                                                                    .warning_amber_rounded,
+                                                                color: red,
+                                                                size: 40,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 16,
+                                                            ),
+                                                            Text(
+                                                              'Un problème est survenu, veuillez reessayer!',
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    "Roboto",
+                                                                fontSize: 16.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ),
+                                                            Align(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                  top: 26.0,
+                                                                ),
+                                                                child:
+                                                                    FlatButton(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            10.0),
+                                                                    height:
+                                                                        40.5,
+                                                                    width: 120,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0),
                                                                       color:
-                                                                          green,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
+                                                                          red10,
+                                                                    ),
+                                                                    child:
+                                                                        Center(
+                                                                      child:
+                                                                          Text(
+                                                                        "OK",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              14.0,
+                                                                          color:
+                                                                              red,
+                                                                          fontWeight:
+                                                                              FontWeight.w600,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            }
+                                          } else {
+                                            print(_emailController.text
+                                                .contains("@"));
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return Dialog(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                  ), //this right here
+                                                  child: Container(
+                                                    height: 200,
+                                                    width: 320,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              12.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Align(
+                                                            child: Icon(
+                                                              Icons
+                                                                  .warning_amber_rounded,
+                                                              color: red,
+                                                              size: 40,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 16,
+                                                          ),
+                                                          Center(
+                                                            child: Text(
+                                                              _emailController
+                                                                          .text
+                                                                          .isNotEmpty &&
+                                                                      !_emailController
+                                                                          .text
+                                                                          .contains(
+                                                                              "@")
+                                                                  ? "L'Email saisi n'est pas valide!"
+                                                                  : "Le numéro saisi n'est pas valide!",
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    "Roboto",
+                                                                fontSize: 16.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ),
+                                                          ),
+                                                          Align(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                top: 26.0,
+                                                              ),
+                                                              child: FlatButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              10.0),
+                                                                  height: 40.5,
+                                                                  width: 120,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0),
+                                                                    color:
+                                                                        red10,
+                                                                  ),
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "OK",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        color:
+                                                                            red,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                          );
+                                                );
+                                              },
+                                            );
+                                          }
                                         } else {
+                                          setState(() {
+                                            _loading = false;
+                                          });
+                                          print("Un problème est survenu!");
                                           showDialog(
                                             context: context,
                                             builder: (BuildContext context) {
@@ -747,7 +989,7 @@ class _DmpPageState extends State<DmpPage> {
                                                           height: 16,
                                                         ),
                                                         Text(
-                                                          'Un problème est survenu, veuillez reessayer!',
+                                                          "Le montant minimum d'un DMP est de 500 FCFA!",
                                                           style: TextStyle(
                                                             fontFamily:
                                                                 "Roboto",
@@ -853,17 +1095,20 @@ class _DmpPageState extends State<DmpPage> {
                                                       SizedBox(
                                                         height: 16,
                                                       ),
-                                                      Text(
-                                                        'Vous ne pouvez pas retirer au dela de votre solde!',
-                                                        style: TextStyle(
-                                                          fontFamily: "Roboto",
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: Colors.black,
+                                                      Center(
+                                                        child: Text(
+                                                          'Les champs sont obligatoires!',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                "Roboto",
+                                                            fontSize: 16.0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: Colors.black,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.center,
                                                         ),
-                                                        textAlign:
-                                                            TextAlign.center,
                                                       ),
                                                       Align(
                                                         child: Padding(

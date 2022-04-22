@@ -8,11 +8,14 @@ import 'package:box_app/screens/history/transaction.dart';
 import 'package:box_app/screens/home/home.dart';
 import 'package:box_app/screens/payment/dmp.dart';
 import 'package:box_app/screens/payment/payment.dart';
+import 'package:box_app/services/location.dart';
 import 'package:box_app/services/transaction.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
+import 'package:new_version/new_version.dart';
 import 'package:progress_indicator_button/progress_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -40,38 +43,79 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     size: 100.0,
   );
 
+  final LocationService locationService = LocationService();
+
+  advancedStatusCheck(NewVersion newVersion) async {
+    final status = await newVersion.getVersionStatus();
+
+    if (status != null) {
+      debugPrint(status.releaseNotes);
+      debugPrint(status.appStoreLink);
+      debugPrint(status.localVersion);
+      debugPrint(status.storeVersion);
+      debugPrint(status.canUpdate.toString());
+
+      if (status.canUpdate) {
+        newVersion.showUpdateDialog(
+          context: context,
+          versionStatus: status,
+          dialogTitle: "Nouvelle Version",
+          dialogText:
+              "Une nouvelle version de Box est disponible. Veuillez procéder à la mise à jour!",
+          updateButtonText: "Mettre à jour",
+          dismissButtonText: "Plus tard",
+        );
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // _fcm = FirebaseMessaging.instance;
+    final newVersion = NewVersion(
+      iOSId: 'com.paydunya.box-app',
+      androidId: 'com.paydunya.box-app',
+    );
+
+    advancedStatusCheck(newVersion);
+
+    locationService.determinePosition().then((value) {
+      print("hereeee");
+      print(value.latitude);
+      print(value.longitude);
+
+      getAddressFromLatLong(value.latitude, value.longitude);
+    });
+  }
+
+  Future<void> getAddressFromLatLong(double latitude, double longitude) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(latitude, longitude);
+    // print(placemarks);
+    Placemark place = placemarks[0];
+    currentCoutry = place.country;
+    print("L'addresse");
+
+    print(place);
+    print(place.isoCountryCode);
+
+    print("POSITIO ACTUEL");
+
+    print(currentCoutry);
+  }
+
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   brightness: Brightness.dark,
-      //   iconTheme: IconThemeData(color: Colors.white),
-      //   centerTitle: true,
-      //   backgroundColor: Colors.white,
-      //   // title: Text(
-      //   //   "Box",
-      //   //   style: TextStyle(
-      //   //     fontFamily: "Roboto",
-      //   //     fontSize: 20.0,
-      //   //     fontWeight: FontWeight.w600,
-      //   //     color: Colors.white,
-      //   //   ),
-      //   // ),
-      //   // leading: new IconButton(
-      //   //   icon: new Icon(Icons.ac_unit),
-      //   //   onPressed: () => Navigator.of(context).pop(),
-      //   // ),
-      //   elevation: 0.0,
-      // ),
       body: FutureBuilder(
         future: transactionService.getTransactions(activeToken),
         builder: (_, snapshot) {
-          print("SnapSHOT");
-          print(snapshot.data);
           if (snapshot.data != null) {
             List<Transactions> transactions = snapshot.data;
+            print(currentCoutry);
             return ListView(
               children: <Widget>[
                 Stack(
@@ -151,9 +195,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 PaymentPage(
-                                              wallet:
-                                                  walletsByCountry["Sénégal"]
-                                                      [0],
+                                              wallet: walletsByCountry[
+                                                  currentCoutry][0],
                                             ),
                                           ),
                                         );
@@ -184,7 +227,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                             padding: const EdgeInsets.all(5.0),
                                             child: Image(
                                               image: AssetImage(
-                                                walletsByCountry["Sénégal"][0]
+                                                walletsByCountry[currentCoutry]
+                                                        [0]
                                                     .logo,
                                               ),
                                               fit: BoxFit.cover,
@@ -199,9 +243,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 PaymentPage(
-                                              wallet:
-                                                  walletsByCountry["Sénégal"]
-                                                      [1],
+                                              wallet: walletsByCountry[
+                                                  currentCoutry][1],
                                             ),
                                           ),
                                         );
@@ -232,7 +275,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                             padding: const EdgeInsets.all(5.0),
                                             child: Image(
                                               image: AssetImage(
-                                                walletsByCountry["Sénégal"][1]
+                                                walletsByCountry[currentCoutry]
+                                                        [1]
                                                     .logo,
                                               ),
                                               fit: BoxFit.cover,
@@ -247,9 +291,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 PaymentPage(
-                                              wallet:
-                                                  walletsByCountry["Sénégal"]
-                                                      [2],
+                                              wallet: walletsByCountry[
+                                                  currentCoutry][2],
                                             ),
                                           ),
                                         );
@@ -280,7 +323,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                             padding: const EdgeInsets.all(5.0),
                                             child: Image(
                                               image: AssetImage(
-                                                walletsByCountry["Sénégal"][2]
+                                                walletsByCountry[currentCoutry]
+                                                        [2]
                                                     .logo,
                                               ),
                                               fit: BoxFit.cover,
@@ -305,9 +349,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 PaymentPage(
-                                              wallet:
-                                                  walletsByCountry["Sénégal"]
-                                                      [3],
+                                              wallet: walletsByCountry[
+                                                  currentCoutry][3],
                                             ),
                                           ),
                                         );
@@ -338,7 +381,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                             padding: const EdgeInsets.all(5.0),
                                             child: Image(
                                               image: AssetImage(
-                                                walletsByCountry["Sénégal"][3]
+                                                walletsByCountry[currentCoutry]
+                                                        [3]
                                                     .logo,
                                               ),
                                               fit: BoxFit.cover,
@@ -353,9 +397,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 PaymentPage(
-                                              wallet:
-                                                  walletsByCountry["Sénégal"]
-                                                      [4],
+                                              wallet: walletsByCountry[
+                                                  currentCoutry][4],
                                             ),
                                           ),
                                         );
@@ -386,7 +429,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                             padding: const EdgeInsets.all(5.0),
                                             child: Image(
                                               image: AssetImage(
-                                                walletsByCountry["Sénégal"][4]
+                                                walletsByCountry[currentCoutry]
+                                                        [4]
                                                     .logo,
                                               ),
                                               fit: BoxFit.cover,
@@ -428,7 +472,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                           width: 80,
                                           color: Colors.white,
                                           image: AssetImage(
-                                            walletsByCountry["Sénégal"][1].logo,
+                                            walletsByCountry[currentCoutry][1]
+                                                .logo,
                                           ),
                                           fit: BoxFit.cover,
                                         ),
@@ -439,7 +484,6 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                               ],
                             ),
                           ),
-
                           SizedBox(
                             height: 16,
                           ),

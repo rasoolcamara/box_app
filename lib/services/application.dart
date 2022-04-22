@@ -92,9 +92,13 @@ class ApplicationService {
 
       String log = phone ?? email;
       Application application = await loginStep2(password, log);
-      await _prefs.setInt("userId", application.user.id);
-      userId = application.user.id;
-      return application;
+      if (application != null) {
+        await _prefs.setInt("userId", application.user.id);
+        userId = application.user.id;
+        return application;
+      } else {
+        return null;
+      }
     } else {
       return null;
     }

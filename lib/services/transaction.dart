@@ -13,9 +13,6 @@ class TransactionService {
       },
     );
 
-    print("DATA");
-    print(res.body);
-
     if (res.statusCode == 200) {
       var body = json.decode(res.body);
 
