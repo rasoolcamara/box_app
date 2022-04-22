@@ -28,10 +28,10 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-  final PaydunyaService paydunyaService = PaydunyaService();
   final FreeMoneyService freeMoneyService = FreeMoneyService();
   final EMoneyService eMoneyService = EMoneyService();
   final WaveService waveService = WaveService();
+  final PaydunyaService paydunyaService = PaydunyaService();
   final WizAllService wizAllService = WizAllService();
   final OMSNService omsnService = OMSNService();
 

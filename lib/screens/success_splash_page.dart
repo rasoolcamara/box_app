@@ -53,56 +53,57 @@ class _SuccessSplashScreenState extends State<SuccessSplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 150,
-                width: 150,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/success.png'),
-                    // fit: BoxFit.fill,
-                  ),
-                  // // color: Colors.transparent.withOpacity(0.1),
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 150,
+              width: 150,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                image: DecorationImage(
+                  image: AssetImage('assets/images/success.png'),
+                  // fit: BoxFit.fill,
                 ),
-                // child: SvgPicture.asset(
-                //   'assets/images/icon.svg',
-                //   // fit: BoxFit.cover,
-                // ),
+                // // color: Colors.transparent.withOpacity(0.1),
               ),
-              SizedBox(
-                height: 24,
+              // child: SvgPicture.asset(
+              //   'assets/images/icon.svg',
+              //   // fit: BoxFit.cover,
+              // ),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            Text(
+              "Félicitations !",
+              style: TextStyle(
+                fontFamily: "Roboto",
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
-              Text(
-                "Félicitations !",
-                style: TextStyle(
-                  fontFamily: "Roboto",
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              "Votre Box à été configurée avec succès!",
+              style: TextStyle(
+                fontFamily: "Roboto",
+                fontSize: 16.0,
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
               ),
-              SizedBox(
-                height: 16,
-              ),
-              Text(
-                "Votre Box à été configurée avec succès!",
-                style: TextStyle(
-                  fontFamily: "Roboto",
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
-              )
-            ],
-          ),
-        ));
+              textAlign: TextAlign.center,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
