@@ -156,7 +156,7 @@ List<Wallet> walletsBF = [
 
 Map<String, List<Wallet>> walletsByCountry = {
   "Sénégal": walletsSenegal,
-  "Code d'ivoire": walletsCI,
+  "Cote d'ivoire": walletsCI,
   "Bénin": walletsBJ,
-  // "Burkina Faso": walletsBF,
+  "Burkina Faso": walletsBF,
 };
