@@ -10,7 +10,7 @@ String invoiceToken = '';
 String invoiceUrl = '';
 String activeToken = '';
 String activeUserToken = '';
-
+String currentCoutry = 'Sénégal';
 int userId;
 
 Application activeApplication = Application();

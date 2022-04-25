@@ -60,262 +60,271 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        brightness: Brightness.dark,
-        iconTheme: IconThemeData(color: gray),
-        centerTitle: false,
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus.unfocus();
+      },
+      child: Scaffold(
         backgroundColor: Colors.white,
-        title: Text(
-          widget.wallet.name,
-          style: TextStyle(
-            fontFamily: "Roboto",
-            fontSize: 20.0,
-            fontWeight: FontWeight.w600,
-            color: gray,
-          ),
-        ),
-        elevation: 0.0,
-        leading: Padding(
-          padding: EdgeInsets.only(top: 10, left: 16, bottom: 8),
-          child: Container(
-            height: 30,
-            width: 30,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(10.0),
-              ),
-              border: Border.all(
-                color: Colors.black,
-                width: 1.0,
-              ),
+        appBar: AppBar(
+          brightness: Brightness.dark,
+          iconTheme: IconThemeData(color: gray),
+          centerTitle: false,
+          backgroundColor: Colors.white,
+          title: Text(
+            widget.wallet.name,
+            style: TextStyle(
+              fontFamily: "Roboto",
+              fontSize: 20.0,
+              fontWeight: FontWeight.w600,
+              color: gray,
             ),
-            child: Padding(
-              padding: EdgeInsets.only(left: 5),
-              child: IconButton(
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  size: 20,
+          ),
+          elevation: 0.0,
+          leading: Padding(
+            padding: EdgeInsets.only(top: 10, left: 16, bottom: 8),
+            child: Container(
+              height: 30,
+              width: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10.0),
                 ),
-                onPressed: () => Navigator.of(context).pop(),
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1.0,
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(left: 5),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    size: 20,
+                  ),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
               ),
             ),
           ),
         ),
-      ),
-      body: _loading
-          ? spinkit
-          : ListView(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.only(bottom: 50.0),
-                      // height: _height,
-                      width: double.infinity,
-                      decoration: BoxDecoration(color: Colors.white),
-                      child: Form(
-                        key: _paymentFormKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            // Email and Phone
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 60.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    "Numéro de téléphone",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Container(
-                                    height: 52.5,
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5.0),
-                                      ),
-                                      border: Border.all(
+        body: _loading
+            ? spinkit
+            : ListView(
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      Container(
+                        padding: const EdgeInsets.only(bottom: 50.0),
+                        // height: _height,
+                        width: double.infinity,
+                        decoration: BoxDecoration(color: Colors.white),
+                        child: Form(
+                          key: _paymentFormKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              // Email and Phone
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 25.0, right: 25.0, top: 60.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Numéro de téléphone",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                         color: Colors.black,
-                                        width: 1.0,
                                       ),
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(0.0),
-                                      child: Theme(
-                                        data: ThemeData(
-                                            hintColor: Colors.transparent),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 0.0),
-                                          child: TextFormField(
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.start,
-                                            keyboardType: TextInputType.phone,
-                                            autocorrect: false,
-                                            autofocus: false,
-                                            controller: _phoneController,
-                                            decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              contentPadding: EdgeInsets.only(
-                                                left: 20.0,
-                                                bottom: 16,
-                                              ),
-                                              filled: true,
-                                              fillColor: Colors.transparent,
-                                              labelText: '',
-                                              floatingLabelBehavior:
-                                                  FloatingLabelBehavior.never,
-                                              hintStyle: TextStyle(
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Container(
+                                      height: 52.5,
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0),
+                                        ),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(0.0),
+                                        child: Theme(
+                                          data: ThemeData(
+                                              hintColor: Colors.transparent),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 0.0),
+                                            child: TextFormField(
+                                              style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500,
                                                 color: Colors.black,
                                               ),
-                                              // prefixIcon: CountryCodePicker(
-                                              //   textStyle: TextStyle(
-                                              //     fontSize: 15,
-                                              //     fontWeight:
-                                              //         FontWeight.w500,
-                                              //     color: Colors.black,
-                                              //   ),
-                                              //   dialogTextStyle: TextStyle(
-                                              //     fontSize: 15,
-                                              //     fontWeight:
-                                              //         FontWeight.w500,
-                                              //     color: Colors.black,
-                                              //   ),
-                                              //   flagWidth: 30,
-                                              //   hideSearch: true,
-                                              //   dialogSize: Size(320, 300),
-                                              //   initialSelection: 'SN',
-                                              //   countryFilter: [
-                                              //     'SN',
-                                              //     'CI',
-                                              //     'BJ'
-                                              //   ],
-                                              //   onChanged: (country) {
-                                              //     _countryCode =
-                                              //         country.dialCode;
-                                              //     print(country.name);
-                                              //   },
-                                              // ),
-                                              labelStyle: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.black,
+                                              textAlign: TextAlign.start,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              autocorrect: false,
+                                              autofocus: false,
+                                              controller: _phoneController,
+                                              decoration: InputDecoration(
+                                                border: InputBorder.none,
+                                                contentPadding: EdgeInsets.only(
+                                                  left: 20.0,
+                                                  bottom: 16,
+                                                ),
+                                                filled: true,
+                                                fillColor: Colors.transparent,
+                                                labelText: '',
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior.never,
+                                                hintStyle: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.black,
+                                                ),
+                                                // prefixIcon: CountryCodePicker(
+                                                //   textStyle: TextStyle(
+                                                //     fontSize: 15,
+                                                //     fontWeight:
+                                                //         FontWeight.w500,
+                                                //     color: Colors.black,
+                                                //   ),
+                                                //   dialogTextStyle: TextStyle(
+                                                //     fontSize: 15,
+                                                //     fontWeight:
+                                                //         FontWeight.w500,
+                                                //     color: Colors.black,
+                                                //   ),
+                                                //   flagWidth: 30,
+                                                //   hideSearch: true,
+                                                //   dialogSize: Size(320, 300),
+                                                //   initialSelection: 'SN',
+                                                //   countryFilter: [
+                                                //     'SN',
+                                                //     'CI',
+                                                //     'BJ'
+                                                //   ],
+                                                //   onChanged: (country) {
+                                                //     _countryCode =
+                                                //         country.dialCode;
+                                                //     print(country.name);
+                                                //   },
+                                                // ),
+                                                labelStyle: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            // Password
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 25.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    "Montant",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Container(
-                                    height: 52.5,
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5.0),
-                                      ),
-                                      border: Border.all(
+                              // Password
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 25.0, right: 25.0, top: 25.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Montant",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
                                         color: Colors.black,
-                                        width: 1.0,
                                       ),
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(0.0),
-                                      child: Theme(
-                                        data: ThemeData(
-                                            hintColor: Colors.transparent),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 0.0,
-                                          ),
-                                          child: TextFormField(
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black,
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Container(
+                                      height: 52.5,
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0),
+                                        ),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(0.0),
+                                        child: Theme(
+                                          data: ThemeData(
+                                              hintColor: Colors.transparent),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 0.0,
                                             ),
-                                            textAlign: TextAlign.start,
-                                            keyboardType: TextInputType.phone,
-                                            autocorrect: false,
-                                            autofocus: false,
-                                            controller: _amountController,
-                                            decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              contentPadding: EdgeInsets.only(
-                                                left: 20.0,
-                                                bottom: 16,
-                                              ),
-                                              filled: true,
-                                              floatingLabelBehavior:
-                                                  FloatingLabelBehavior.never,
-                                              fillColor: Colors.transparent,
-                                              labelText: '',
-                                              hintStyle: TextStyle(
+                                            child: TextFormField(
+                                              style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500,
                                                 color: Colors.black,
                                               ),
-                                              labelStyle: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.black,
-                                              ),
-                                              // suffix
-                                              suffixIcon: Material(
-                                                elevation: 0,
-                                                color: Colors.transparent,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(30),
+                                              textAlign: TextAlign.start,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              autocorrect: false,
+                                              autofocus: false,
+                                              controller: _amountController,
+                                              decoration: InputDecoration(
+                                                border: InputBorder.none,
+                                                contentPadding: EdgeInsets.only(
+                                                  left: 20.0,
+                                                  bottom: 16,
                                                 ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                    15.0,
+                                                filled: true,
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior.never,
+                                                fillColor: Colors.transparent,
+                                                labelText: '',
+                                                hintStyle: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.black,
+                                                ),
+                                                labelStyle: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.black,
+                                                ),
+                                                // suffix
+                                                suffixIcon: Material(
+                                                  elevation: 0,
+                                                  color: Colors.transparent,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(30),
                                                   ),
-                                                  child: Text(
-                                                    'FCFA',
-                                                    style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                      15.0,
+                                                    ),
+                                                    child: Text(
+                                                      'FCFA',
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.black,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -325,71 +334,200 @@ class _PaymentPageState extends State<PaymentPage> {
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
 
-                            // FormError(errors: errors),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 12.0,
-                                right: 12.0,
-                                top: 65.0,
-                              ),
-                              child: FlatButton(
-                                onPressed: () async {
-                                  setState(() {
-                                    _loading = true;
-                                  });
-                                  final checkoutInvoice =
-                                      await paydunyaService.checkoutInvoice(
-                                    num.parse(_amountController.text),
-                                  );
-                                  if (checkoutInvoice != null) {
-                                    var paymentResult = false;
-
-                                    switch (widget.wallet.name) {
-                                      case "Free Money":
-                                        paymentResult = await freeMoneyService
-                                            .payment(_phoneController.text);
-                                        break;
-                                      case "E Money":
-                                        paymentResult = await eMoneyService
-                                            .payment(_phoneController.text);
-                                        break;
-                                      case "Wave":
-                                        paymentResult = await waveService
-                                            .payment(_phoneController.text);
-                                        break;
-                                      case "WizAll Money":
-                                        // paymentResult = true;
-                                        paymentResult =
-                                            await wizAllService.paymentRequest(
-                                                _phoneController.text);
-                                        print(paymentResult);
-
-                                        break;
-                                      default:
-                                    }
+                              // FormError(errors: errors),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 12.0,
+                                  right: 12.0,
+                                  top: 65.0,
+                                ),
+                                child: FlatButton(
+                                  onPressed: () async {
                                     setState(() {
-                                      _loading = false;
+                                      _loading = true;
                                     });
-                                    if (paymentResult == true) {
-                                      if (widget.wallet.name ==
-                                          "WizAll Money") {
-                                        Navigator.of(context).push(
-                                          PageRouteBuilder(
-                                            pageBuilder: (_, __, ___) =>
-                                                WizallOTPConfirmPage(
-                                              wallet:
-                                                  walletsByCountry["Sénégal"]
-                                                      [3],
-                                              phone: _phoneController.text,
+                                    final checkoutInvoice =
+                                        await paydunyaService.checkoutInvoice(
+                                      num.parse(_amountController.text),
+                                    );
+                                    if (checkoutInvoice != null) {
+                                      var paymentResult = false;
+
+                                      switch (widget.wallet.name) {
+                                        case "Free Money":
+                                          paymentResult = await freeMoneyService
+                                              .payment(_phoneController.text);
+                                          break;
+                                        case "E Money":
+                                          paymentResult = await eMoneyService
+                                              .payment(_phoneController.text);
+                                          break;
+                                        case "Wave":
+                                          paymentResult = await waveService
+                                              .payment(_phoneController.text);
+                                          break;
+                                        case "WizAll Money":
+                                          // paymentResult = true;
+                                          paymentResult = await wizAllService
+                                              .paymentRequest(
+                                                  _phoneController.text);
+                                          print(paymentResult);
+
+                                          break;
+                                        default:
+                                      }
+                                      setState(() {
+                                        _loading = false;
+                                      });
+                                      if (paymentResult == true) {
+                                        if (widget.wallet.name ==
+                                            "WizAll Money") {
+                                          Navigator.of(context).push(
+                                            PageRouteBuilder(
+                                              pageBuilder: (_, __, ___) =>
+                                                  WizallOTPConfirmPage(
+                                                wallet:
+                                                    walletsByCountry["Sénégal"]
+                                                        [3],
+                                                phone: _phoneController.text,
+                                              ),
                                             ),
-                                          ),
-                                        );
+                                          );
+                                        } else {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Dialog(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ), //this right here
+                                                child: Container(
+                                                  height: 250,
+                                                  width: 320,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            12.0),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Align(
+                                                          child: Container(
+                                                            height: 50,
+                                                            width: 50,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .all(
+                                                                Radius.circular(
+                                                                    10.0),
+                                                              ),
+                                                              image:
+                                                                  DecorationImage(
+                                                                image:
+                                                                    AssetImage(
+                                                                  'assets/images/horloge_murale.png',
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 24,
+                                                        ),
+                                                        Text(
+                                                          'Veuillez demander à votre client de finaliser le paiement sur son téléphone!',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                "Roboto",
+                                                            fontSize: 16.0,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Colors.black,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                        Align(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                              top: 26.0,
+                                                            ),
+                                                            child: FlatButton(
+                                                              onPressed:
+                                                                  () async {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pushReplacement(
+                                                                  MaterialPageRoute(
+                                                                    builder: (_) =>
+                                                                        HomeScreen(),
+                                                                  ),
+                                                                );
+                                                              },
+                                                              child: Container(
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            10.0),
+                                                                height: 40.5,
+                                                                width: 120,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5.0),
+                                                                  color: orange
+                                                                      .withOpacity(
+                                                                          0.08),
+                                                                ),
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "OK",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      color:
+                                                                          orange,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        }
                                       } else {
+                                        print("Un problème est survenu!");
                                         showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
@@ -399,7 +537,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                     BorderRadius.circular(20.0),
                                               ), //this right here
                                               child: Container(
-                                                height: 250,
+                                                height: 240,
                                                 width: 320,
                                                 child: Padding(
                                                   padding: const EdgeInsets.all(
@@ -413,36 +551,23 @@ class _PaymentPageState extends State<PaymentPage> {
                                                             .start,
                                                     children: [
                                                       Align(
-                                                        child: Container(
-                                                          height: 50,
-                                                          width: 50,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  10.0),
-                                                            ),
-                                                            image:
-                                                                DecorationImage(
-                                                              image: AssetImage(
-                                                                'assets/images/horloge_murale.png',
-                                                              ),
-                                                            ),
-                                                          ),
+                                                        child: Icon(
+                                                          Icons
+                                                              .warning_amber_rounded,
+                                                          color: red,
+                                                          size: 40,
                                                         ),
                                                       ),
                                                       SizedBox(
-                                                        height: 24,
+                                                        height: 16,
                                                       ),
                                                       Text(
-                                                        'Veuillez demander à votre client de finaliser le paiement sur son téléphone!',
+                                                        "Assurez-vous d'avoir saisi un numéro valable et ayant assez de fonds!",
                                                         style: TextStyle(
                                                           fontFamily: "Roboto",
                                                           fontSize: 16.0,
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                              FontWeight.w600,
                                                           color: Colors.black,
                                                         ),
                                                         textAlign:
@@ -461,14 +586,6 @@ class _PaymentPageState extends State<PaymentPage> {
                                                               Navigator.of(
                                                                       context)
                                                                   .pop();
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pushReplacement(
-                                                                MaterialPageRoute(
-                                                                  builder: (_) =>
-                                                                      HomeScreen(),
-                                                                ),
-                                                              );
                                                             },
                                                             child: Container(
                                                               padding:
@@ -483,9 +600,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                     BorderRadius
                                                                         .circular(
                                                                             5.0),
-                                                                color: orange
-                                                                    .withOpacity(
-                                                                        0.08),
+                                                                color: red10,
                                                               ),
                                                               child: Center(
                                                                 child: Text(
@@ -494,8 +609,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                       TextStyle(
                                                                     fontSize:
                                                                         14.0,
-                                                                    color:
-                                                                        orange,
+                                                                    color: red,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600,
@@ -525,7 +639,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                   BorderRadius.circular(20.0),
                                             ), //this right here
                                             child: Container(
-                                              height: 240,
+                                              height: 200,
                                               width: 320,
                                               child: Padding(
                                                 padding:
@@ -548,7 +662,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                       height: 16,
                                                     ),
                                                     Text(
-                                                      "Assurez-vous d'avoir saisi un numéro valable et ayant assez de fonds!",
+                                                      'Un problème est survenu veuillez réessayer!',
                                                       style: TextStyle(
                                                         fontFamily: "Roboto",
                                                         fontSize: 16.0,
@@ -612,136 +726,45 @@ class _PaymentPageState extends State<PaymentPage> {
                                         },
                                       );
                                     }
-                                  } else {
-                                    print("Un problème est survenu!");
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return Dialog(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20.0),
-                                          ), //this right here
-                                          child: Container(
-                                            height: 200,
-                                            width: 320,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(12.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Align(
-                                                    child: Icon(
-                                                      Icons
-                                                          .warning_amber_rounded,
-                                                      color: red,
-                                                      size: 40,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 16,
-                                                  ),
-                                                  Text(
-                                                    'Un problème est survenu veuillez réessayer!',
-                                                    style: TextStyle(
-                                                      fontFamily: "Roboto",
-                                                      fontSize: 16.0,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: Colors.black,
-                                                    ),
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                  Align(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                        top: 26.0,
-                                                      ),
-                                                      child: FlatButton(
-                                                        onPressed: () async {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: Container(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  10.0),
-                                                          height: 40.5,
-                                                          width: 120,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5.0),
-                                                            color: red10,
-                                                          ),
-                                                          child: Center(
-                                                            child: Text(
-                                                              "OK",
-                                                              style: TextStyle(
-                                                                fontSize: 14.0,
-                                                                color: red,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(1.0),
+                                    child: Container(
+                                      height: 55.5,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        color: blue,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          widget.wallet.name == "WizAll Money"
+                                              ? "Suivant"
+                                              : "Valider",
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            letterSpacing: 1.5,
                                           ),
-                                        );
-                                      },
-                                    );
-                                  }
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(1.0),
-                                  child: Container(
-                                    height: 55.5,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      color: blue,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        widget.wallet.name == "WizAll Money"
-                                            ? "Suivant"
-                                            : "Valider",
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600,
-                                          letterSpacing: 1.5,
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 35.0,
-                            ),
-                          ],
+                              SizedBox(
+                                height: 35.0,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                    ],
+                  ),
+                ],
+              ),
+      ),
     );
   }
 

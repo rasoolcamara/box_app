@@ -201,7 +201,7 @@ class _DisbursePageState extends State<DisbursePage> {
                                                 ),
                                                 textAlign: TextAlign.start,
                                                 keyboardType:
-                                                    TextInputType.phone,
+                                                    TextInputType.number,
                                                 autocorrect: false,
                                                 autofocus: false,
                                                 initialValue: activeApplication
@@ -225,34 +225,6 @@ class _DisbursePageState extends State<DisbursePage> {
                                                     fontWeight: FontWeight.w500,
                                                     color: Colors.black,
                                                   ),
-                                                  // prefixIcon: CountryCodePicker(
-                                                  //   textStyle: TextStyle(
-                                                  //     fontSize: 15,
-                                                  //     fontWeight:
-                                                  //         FontWeight.w500,
-                                                  //     color: Colors.black,
-                                                  //   ),
-                                                  //   dialogTextStyle: TextStyle(
-                                                  //     fontSize: 15,
-                                                  //     fontWeight:
-                                                  //         FontWeight.w500,
-                                                  //     color: Colors.black,
-                                                  //   ),
-                                                  //   flagWidth: 30,
-                                                  //   hideSearch: true,
-                                                  //   dialogSize: Size(320, 300),
-                                                  //   initialSelection: 'SN',
-                                                  //   countryFilter: [
-                                                  //     'SN',
-                                                  //     'CI',
-                                                  //     'BJ'
-                                                  //   ],
-                                                  //   onChanged: (country) {
-                                                  //     _countryCode =
-                                                  //         country.dialCode;
-                                                  //     print(country.name);
-                                                  //   },
-                                                  // ),
                                                   labelStyle: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight: FontWeight.w500,
@@ -315,7 +287,7 @@ class _DisbursePageState extends State<DisbursePage> {
                                                 ),
                                                 textAlign: TextAlign.start,
                                                 keyboardType:
-                                                    TextInputType.phone,
+                                                    TextInputType.number,
                                                 autocorrect: false,
                                                 autofocus: false,
                                                 controller: _amountController,
@@ -383,11 +355,17 @@ class _DisbursePageState extends State<DisbursePage> {
                                   ),
                                   child: FlatButton(
                                     onPressed: () async {
-                                      if (num.parse(_amountController.text) <
-                                          num.parse(
-                                              activeApplication.user.balance)) {
-                                        if (num.parse(_amountController.text) >
-                                            500) {
+                                      if (num.tryParse(
+                                                  _amountController.text) !=
+                                              null &&
+                                          num.parse(_amountController.text) <
+                                              num.parse(activeApplication
+                                                  .user.balance)) {
+                                        if (num.tryParse(
+                                                    _amountController.text) !=
+                                                null &&
+                                            num.parse(_amountController.text) >
+                                                500) {
                                           setState(() {
                                             _loading = true;
                                           });
