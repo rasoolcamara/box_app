@@ -221,8 +221,14 @@ class _AdminPageState extends State<AdminPage> {
                           InkWell(
                             onTap: () {
                               print("Contacter un de nos agents");
-                              // launch("tel://+221776738631");
-                              _callSAV();
+                              if (currentCoutry == "SN") {
+                                launch("tel://+221776738631");
+                              } else if (currentCoutry == "CI") {
+                                launch("tel://+2250777568646");
+                              } else if (currentCoutry == "BJ") {
+                                launch("tel://+22952004444");
+                              }
+                              // _callSAV();
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(

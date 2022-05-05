@@ -2,18 +2,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:box_app/app_properties.dart';
 
-
-class OMCIService {
+class MoovCIService {
   Future<String> payment(
     String phone,
   ) async {
     final response = await http.post(
-      Uri.parse('https://app.paydunya.com/api/v1/softpay/orange-money-ci'),
+      Uri.parse('https://app.paydunya.com/api/v1/softpay/moov-ci'),
       body: jsonEncode({
-        "orange_money_ci_customer_fullname": activeApplication.name,
-        "orange_money_ci_email": "bow@box.com",
-        "orange_money_ci_phone_number": phone,
-        "orange_money_ci_wallet_provider": "ci",
+        "moov_ci_customer_fullname": activeApplication.name,
+        "moov_ci_email": "box@box.com",
+        "moov_ci_phone_number": phone,
         'payment_token': invoiceToken,
       }),
       headers: <String, String>{
@@ -23,7 +21,7 @@ class OMCIService {
 
     var body = jsonDecode(response.body);
 
-    print("Payment par EMoney");
+    print("Payment par MOOVCI");
     print(body);
 
     if (body['success'] == true) {
