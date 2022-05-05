@@ -13,16 +13,22 @@ class TransactionService {
       },
     );
 
+    print("getTransactions");
+
     if (res.statusCode == 200) {
       var body = json.decode(res.body);
 
       List<dynamic> data = body;
+      print("data");
+      print(data);
+      List<Transactions> transactions = data.map(
+        (dynamic item) {
+          return Transactions.fromJson(item);
+        },
+      ).toList();
 
-      List<Transactions> transactions = data
-          .map(
-            (dynamic item) => Transactions.fromJson(item),
-          )
-          .toList();
+      print("getTransactions");
+      print(transactions.length);
 
       return transactions;
     } else {

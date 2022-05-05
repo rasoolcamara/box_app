@@ -1,13 +1,13 @@
 import 'package:box_app/app_properties.dart';
 
 class Wallet {
-  final int id;
-  final String name;
-  final String logo;
-  final String slug;
-  final String scope;
-  final int isActive;
-  final String status;
+  int id;
+  String name;
+  String logo;
+  String slug;
+  String scope;
+  int isActive;
+  String status;
 
   Wallet({
     this.id,
@@ -33,28 +33,37 @@ class Wallet {
 }
 
 List<Wallet> walletsFromListJson(List<dynamic> json) {
-  List<Wallet> wallets = json
-      .map(
-        (dynamic item) => Wallet.fromJson(item),
-      )
-      .toList();
+  List<Wallet> wallets = json.map(
+    (dynamic item) {
+      // print(item);
+      Wallet wallet = Wallet.fromJson(item);
+      wallet.logo = walletsLogo[wallet.slug];
+      walletsByCountry[wallet.scope.toUpperCase()].add(wallet);
+      return wallet;
+    },
+  ).toList();
+
+  // print("walletsByCountry");
+  // print(walletsByCountry);
+
+  wallets = wallets.where((Wallet wallet) {
+    return wallet.scope == currentCoutry.toLowerCase();
+  }).toList();
+
+  // print("wallets.length");
+  // print(wallets);
+
   return wallets;
 }
 
 Wallet walletsFromSlug(String item) {
   String val = item.replaceAll('_', "-");
-
-  List<Wallet> wallets = activeApplication.wallets.where((Wallet wallet) {
-    // print("test 22");
-    // print(wallet.slug);
-    // print("test 22");
-    // print(val);
-    val = "orange-money-senegal";
-    return wallet.slug == val;
-  }).toList();
-
-  Wallet wallet =
-      wallets.isNotEmpty ? wallets.first : activeApplication.wallets.first;
+  print(activeApplication.wallets.length);
+  
+  Wallet wallet = activeApplication.wallets.firstWhere(
+    (Wallet wallet) => wallet.slug == item,
+    orElse: () => activeApplication.wallets.first,
+  );
 
   return wallet;
 }
@@ -153,10 +162,3 @@ List<Wallet> walletsBF = [
     status: 'active',
   ),
 ];
-
-Map<String, List<Wallet>> walletsByCountry = {
-  "Sénégal": walletsSenegal,
-  "Cote d'ivoire": walletsCI,
-  "Bénin": walletsBJ,
-  "Burkina Faso": walletsBF,
-};

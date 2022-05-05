@@ -156,7 +156,7 @@ class _TransactionPageState extends State<TransactionPage> {
                               ),
                             ),
                             subtitle: Text(
-                              widget.transaction.wallet.name,
+                              widget.transaction.wallet,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,

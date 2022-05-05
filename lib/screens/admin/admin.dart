@@ -221,8 +221,8 @@ class _AdminPageState extends State<AdminPage> {
                           InkWell(
                             onTap: () {
                               print("Contacter un de nos agents");
-                              launch("tel://+221776738631");
-                              // _callSAV();
+                              // launch("tel://+221776738631");
+                              _callSAV();
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(

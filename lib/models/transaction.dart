@@ -1,9 +1,11 @@
+import 'package:box_app/app_properties.dart';
 import 'package:box_app/models/wallet.dart';
 
 class Transactions {
   final int id;
   final String identifier;
-  final Wallet wallet;
+  // final Wallet wallet;
+  final String wallet;
   final String customerPhone;
   final String customerName;
   final String customerEmail;
@@ -39,7 +41,8 @@ class Transactions {
         customerEmail: json['customer_email'] as String,
         token: json['token'] as String,
         paydunyaRequestToken: json['payment_request_token'] as String,
-        wallet: walletsFromSlug(json['payment_method']),
+        wallet:
+            json['payment_method'], // walletsFromSlug(json['payment_method']),
         amount: json['amount'] as num,
         totalAmount: json['amount_without_fees'] as String,
         date: json['created_at']['date'] as String,

@@ -1,4 +1,5 @@
 import 'package:box_app/models/application.dart';
+import 'package:box_app/models/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -10,8 +11,32 @@ String invoiceToken = '';
 String invoiceUrl = '';
 String activeToken = '';
 String activeUserToken = '';
-String currentCoutry = "Sénégal";
+String currentCoutry = "CI";
 int userId;
+
+Map<String, List<Wallet>> walletsByCountry = {
+  "SN": [],
+  "CI": [],
+  "BJ": [],
+  "BF": [],
+  "TG": [],
+  "INTERNATIONAL": [],
+};
+
+Map<String, String> walletsLogo = {
+  "orange-money-senegal": 'assets/images/logo-part/orange-money.png',
+  "orange-money-burkina": 'assets/images/logo-part/orange-money.png',
+  "expresso-sn": 'assets/images/logo-part/emoney.png',
+  "free-money-senegal": 'assets/images/logo-part/free-money.png',
+  "wave-senegal": 'assets/images/logo-part/wave.png',
+  "moov-burkina-faso": 'assets/images/logo-part/moov.png',
+  "moov-bj": 'assets/images/logo-part/moov.png',
+  "moov-benin": 'assets/images/logo-part/moov.png',
+  "moov-ci": 'assets/images/logo-part/moov.png',
+  "moov-bf": 'assets/images/logo-part/moov.png',
+  "wizall-senegal": 'assets/images/logo-part/wizall.png',
+  "orange-money-ci": 'assets/images/logo-part/orange-money.png',
+};
 
 Application activeApplication = Application();
 String appStoreUrl = "https://apps.apple.com/us/app/sendkwe/id1600051085";

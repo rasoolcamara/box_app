@@ -23,7 +23,7 @@ class ApplicationService {
       var body = json.decode(response.body);
       var appli = body['application'];
       print('La reponse APP');
-      print(appli['withdraw_channel']);
+      print(appli['active_channels']);
       activeApplication = Application.fromJson(appli);
 
       return activeApplication;
