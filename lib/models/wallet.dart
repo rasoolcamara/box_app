@@ -3,7 +3,7 @@ import 'package:box_app/app_properties.dart';
 class Wallet {
   int id;
   String name;
-  String logo;
+  String logo = 'assets/images/logo-part/wave.png';
   String slug;
   String scope;
   int isActive;
@@ -37,7 +37,8 @@ List<Wallet> walletsFromListJson(List<dynamic> json) {
     (dynamic item) {
       // print(item);
       Wallet wallet = Wallet.fromJson(item);
-      wallet.logo = walletsLogo[wallet.slug];
+      wallet.logo =
+          walletsLogo[wallet.slug] ?? "assets/images/logo-part/wave.png";
       walletsByCountry[wallet.scope.toUpperCase()].add(wallet);
       return wallet;
     },
@@ -59,7 +60,7 @@ List<Wallet> walletsFromListJson(List<dynamic> json) {
 Wallet walletsFromSlug(String item) {
   String val = item.replaceAll('_', "-");
   print(activeApplication.wallets.length);
-  
+
   Wallet wallet = activeApplication.wallets.firstWhere(
     (Wallet wallet) => wallet.slug == item,
     orElse: () => activeApplication.wallets.first,

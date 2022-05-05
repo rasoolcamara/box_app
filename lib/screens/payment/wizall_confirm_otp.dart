@@ -40,10 +40,10 @@ class _WizallOTPConfirmPageState extends State<WizallOTPConfirmPage> {
 
   final GlobalKey<FormState> _paymentFormKey = GlobalKey<FormState>();
   TextEditingController controller = TextEditingController(text: "");
+  String otpCode;
 
   final List<String> errors = [];
   String _countryCode = "+221";
-  String otpCode;
   bool _loading = false;
 
   final spinkit = SpinKitRing(

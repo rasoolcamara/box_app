@@ -13,7 +13,6 @@ import 'package:box_app/services/transaction.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
 import 'package:new_version/new_version.dart';
 import 'package:progress_indicator_button/progress_button.dart';
@@ -42,8 +41,6 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     lineWidth: 10.0,
     size: 100.0,
   );
-
-  final LocationService locationService = LocationService();
 
   advancedStatusCheck(NewVersion newVersion) async {
     final status = await newVersion.getVersionStatus();
@@ -79,32 +76,6 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     );
 
     advancedStatusCheck(newVersion);
-
-    locationService.determinePosition().then((value) {
-      print("hereeee");
-      print(value.latitude);
-      print(value.longitude);
-
-      getAddressFromLatLong(value.latitude, value.longitude);
-    });
-  }
-
-  Future<void> getAddressFromLatLong(double latitude, double longitude) async {
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(latitude, longitude);
-    // print("placemarks");
-    // print(placemarks);
-
-    Placemark place = placemarks[0];
-    // currentCoutry = place.isoCountryCode;
-    // print("L'adresse");
-
-    // print(place);
-    // print(place.isoCountryCode);
-
-    // print("POSITIONN ACTUEL");
-
-    // print(currentCoutry);
   }
 
   @override
@@ -682,7 +653,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                                   pageBuilder: (_, __, ___) =>
                                                       PaymentPage(
                                                     wallet: walletsByCountry[
-                                                        currentCoutry][4],
+                                                        currentCoutry][3],
                                                   ),
                                                 ),
                                               );

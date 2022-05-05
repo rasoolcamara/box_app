@@ -347,7 +347,7 @@ class _DmpPageState extends State<DmpPage> {
                                                             dialogSize:
                                                                 Size(320, 600),
                                                             initialSelection:
-                                                                'SN',
+                                                                currentCoutry,
                                                             onChanged:
                                                                 (country) {
                                                               _countryCode =

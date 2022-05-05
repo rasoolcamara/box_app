@@ -201,34 +201,38 @@ class _PaymentPageState extends State<PaymentPage> {
                                                   fontWeight: FontWeight.w500,
                                                   color: Colors.black,
                                                 ),
-                                                // prefixIcon: CountryCodePicker(
-                                                //   textStyle: TextStyle(
-                                                //     fontSize: 15,
-                                                //     fontWeight:
-                                                //         FontWeight.w500,
-                                                //     color: Colors.black,
-                                                //   ),
-                                                //   dialogTextStyle: TextStyle(
-                                                //     fontSize: 15,
-                                                //     fontWeight:
-                                                //         FontWeight.w500,
-                                                //     color: Colors.black,
-                                                //   ),
-                                                //   flagWidth: 30,
-                                                //   hideSearch: true,
-                                                //   dialogSize: Size(320, 300),
-                                                //   initialSelection: 'SN',
-                                                //   countryFilter: [
-                                                //     'SN',
-                                                //     'CI',
-                                                //     'BJ'
-                                                //   ],
-                                                //   onChanged: (country) {
-                                                //     _countryCode =
-                                                //         country.dialCode;
-                                                //     print(country.name);
-                                                //   },
-                                                // ),
+                                                prefixIcon: CountryCodePicker(
+                                                  showCountryOnly: false,
+                                                  showFlagMain: true,
+                                                  showOnlyCountryWhenClosed:
+                                                      false,
+                                                  showFlagDialog: true,
+                                                  searchStyle: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.black,
+                                                  ),
+                                                  textStyle: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.black,
+                                                  ),
+                                                  dialogTextStyle: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.black,
+                                                  ),
+                                                  flagWidth: 30,
+                                                  hideSearch: false,
+                                                  dialogSize: Size(320, 600),
+                                                  initialSelection:
+                                                      currentCoutry,
+                                                  onChanged: (country) {
+                                                    _countryCode =
+                                                        country.dialCode;
+                                                    print(country.name);
+                                                  },
+                                                ),
                                                 labelStyle: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w500,
@@ -369,18 +373,20 @@ class _PaymentPageState extends State<PaymentPage> {
                                       var paymentResult = false;
                                       var paymentResultMessage = "";
 
+                                      var _phone =
+                                          _countryCode + _phoneController.text;
                                       switch (widget.wallet.name) {
                                         case "Free Money":
                                           paymentResult = await freeMoneyService
-                                              .payment(_phoneController.text);
+                                              .payment(_phone);
                                           break;
                                         case "E Money":
                                           paymentResult = await eMoneyService
-                                              .payment(_phoneController.text);
+                                              .payment(_phone);
                                           break;
                                         case "Wave":
-                                          paymentResult = await waveService
-                                              .payment(_phoneController.text);
+                                          paymentResult =
+                                              await waveService.payment(_phone);
                                           break;
                                         case "ORANGE MONEY CI":
                                           paymentResultMessage =
@@ -390,27 +396,26 @@ class _PaymentPageState extends State<PaymentPage> {
                                         case "WizAll Money":
                                           // paymentResult = true;
                                           paymentResult = await wizAllService
-                                              .paymentRequest(
-                                                  _phoneController.text);
+                                              .paymentRequest(_phone);
                                           print(paymentResult);
                                           break;
                                         case "MOOV CI":
                                           paymentResultMessage =
                                               await moovciService
-                                                  .payment(_phoneController.text);
+                                                  .payment(_phone);
                                           break;
                                         case "MTN CI":
                                           paymentResult = await mtnciService
-                                              .payment(_phoneController.text);
+                                              .payment(_phone);
                                           break;
                                         case "MOOV BENIN":
                                           paymentResultMessage =
                                               await moovbjService
-                                                  .payment(_phoneController.text);
+                                                  .payment(_phone);
                                           break;
                                         case "MTN BENIN":
                                           paymentResult = await mtnbjService
-                                              .payment(_phoneController.text);
+                                              .payment(_phone);
                                           break;
                                         default:
                                       }
@@ -427,7 +432,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                 wallet:
                                                     walletsByCountry["Sénégal"]
                                                         [3],
-                                                phone: _phoneController.text,
+                                                phone: _phone,
                                               ),
                                             ),
                                           );
