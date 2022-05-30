@@ -54,6 +54,7 @@ class _DisbursePageState extends State<DisbursePage> {
   void initState() {
     // _phoneController.text =
     //     TextEditingController(text: activeApplication.user.phoneWithIndicatif);
+    print("COUNTRY CODE");
     super.initState();
   }
 
@@ -195,7 +196,7 @@ class _DisbursePageState extends State<DisbursePage> {
                                               child: TextFormField(
                                                 enabled: false,
                                                 style: TextStyle(
-                                                  fontSize: 15,
+                                                  fontSize: 16,
                                                   fontWeight: FontWeight.w500,
                                                   color: Colors.black,
                                                 ),
@@ -205,14 +206,14 @@ class _DisbursePageState extends State<DisbursePage> {
                                                 autocorrect: false,
                                                 autofocus: false,
                                                 initialValue: activeApplication
-                                                    .user.phoneWithIndicatif,
+                                                    .user.phone,
                                                 // controller: _phoneController,
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
                                                   contentPadding:
                                                       EdgeInsets.only(
-                                                    left: 20.0,
-                                                    bottom: 16,
+                                                    left: 0.0,
+                                                    bottom: 1,
                                                   ),
                                                   filled: true,
                                                   fillColor: Colors.transparent,
@@ -224,6 +225,43 @@ class _DisbursePageState extends State<DisbursePage> {
                                                     fontSize: 15,
                                                     fontWeight: FontWeight.w500,
                                                     color: Colors.black,
+                                                  ),
+                                                  prefixIcon: CountryCodePicker(
+                                                    showCountryOnly: false,
+                                                    showFlagMain: true,
+                                                    showOnlyCountryWhenClosed:
+                                                        false,
+                                                    showFlagDialog: true,
+                                                    searchStyle: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black,
+                                                    ),
+                                                    textStyle: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black,
+                                                    ),
+                                                    dialogTextStyle: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black,
+                                                    ),
+                                                    flagWidth: 30,
+                                                    hideSearch: false,
+                                                    dialogSize: Size(320, 600),
+                                                    initialSelection:
+                                                        activeApplication
+                                                            .user.countrCode
+                                                            .toUpperCase(),
+                                                    onChanged: (country) {
+                                                      _countryCode =
+                                                          country.dialCode;
+                                                      print(country.name);
+                                                    },
                                                   ),
                                                   labelStyle: TextStyle(
                                                     fontSize: 15,
@@ -303,7 +341,7 @@ class _DisbursePageState extends State<DisbursePage> {
                                                       FloatingLabelBehavior
                                                           .never,
                                                   fillColor: Colors.transparent,
-                                                  labelText: '',
+                                                  labelText: '500',
                                                   hintStyle: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight: FontWeight.w500,
@@ -312,7 +350,7 @@ class _DisbursePageState extends State<DisbursePage> {
                                                   labelStyle: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight: FontWeight.w500,
-                                                    color: Colors.black,
+                                                    color: Colors.black45,
                                                   ),
                                                   // suffix
                                                   suffixIcon: Material(
@@ -364,94 +402,73 @@ class _DisbursePageState extends State<DisbursePage> {
                                         if (num.tryParse(
                                                     _amountController.text) !=
                                                 null &&
-                                            num.parse(_amountController.text) >
+                                            num.parse(_amountController.text) >=
                                                 500) {
-                                          setState(() {
-                                            _loading = true;
-                                          });
-
-                                          final result =
-                                              await apiPushService.disburse(
-                                            num.parse(_amountController.text),
-                                            widget.currentPassword,
-                                          );
-
-                                          print(result);
-
-                                          // final result = await apiPushService
-                                          //     .disburseInitiation(
-                                          //   num.parse(_amountController.text),
-                                          //   _phoneController.text,
-                                          // );
-                                          setState(() {
-                                            _loading = false;
-                                          });
-                                          if (result != null) {
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return Dialog(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20.0),
-                                                  ), //this right here
-                                                  child: Container(
-                                                    height: 200,
-                                                    width: 320,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              12.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Align(
-                                                            child: Icon(
-                                                              Icons.done,
-                                                              color: green,
-                                                              size: 40,
-                                                            ),
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Dialog(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ), //this right here
+                                                child: Container(
+                                                  height: 300,
+                                                  width: 400,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            12.0),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Align(
+                                                          child: Icon(
+                                                            Icons
+                                                                .warning_amber_rounded,
+                                                            color: red,
+                                                            size: 64,
                                                           ),
-                                                          SizedBox(
-                                                            height: 16,
+                                                        ),
+                                                        SizedBox(
+                                                          height: 16,
+                                                        ),
+                                                        Text(
+                                                          'Voulez vous vraiment effectuer ce retrait de ${_amountController.text} fcfa',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                "Roboto",
+                                                            fontSize: 16.0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: Colors.black,
                                                           ),
-                                                          Text(
-                                                            result,
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  "Roboto",
-                                                              fontSize: 16.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                          Align(
-                                                            child: Padding(
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Padding(
                                                               padding:
                                                                   const EdgeInsets
                                                                       .only(
-                                                                top: 26.0,
+                                                                top: 45.0,
                                                               ),
                                                               child: FlatButton(
                                                                 onPressed:
                                                                     () async {
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
                                                                   Navigator.of(
                                                                           context)
                                                                       .pop();
@@ -463,105 +480,241 @@ class _DisbursePageState extends State<DisbursePage> {
                                                                           .all(
                                                                               10.0),
                                                                   height: 40.5,
-                                                                  width: 120,
+                                                                  width: 100,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             5.0),
-                                                                    color: green
-                                                                        .withOpacity(
-                                                                            0.08),
+                                                                    color:
+                                                                        blue20,
                                                                   ),
                                                                   child: Center(
                                                                     child: Text(
-                                                                      "Merci",
+                                                                      "NON",
                                                                       style:
                                                                           TextStyle(
                                                                         fontSize:
-                                                                            14.0,
+                                                                            12.0,
                                                                         color:
-                                                                            green,
+                                                                            blue,
                                                                         fontWeight:
-                                                                            FontWeight.w600,
+                                                                            FontWeight.w400,
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          } else {
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return Dialog(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20.0),
-                                                  ), //this right here
-                                                  child: Container(
-                                                    height: 200,
-                                                    width: 320,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              12.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Align(
-                                                            child: Icon(
-                                                              Icons
-                                                                  .warning_amber_rounded,
-                                                              color: red,
-                                                              size: 40,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 16,
-                                                          ),
-                                                          Text(
-                                                            'Un problème est survenu, veuillez reessayer!',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  "Roboto",
-                                                              fontSize: 16.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                          Align(
-                                                            child: Padding(
+                                                            Padding(
                                                               padding:
                                                                   const EdgeInsets
                                                                       .only(
-                                                                top: 26.0,
+                                                                top: 45.0,
+                                                                right: 0,
+                                                                left: 0,
                                                               ),
                                                               child: FlatButton(
                                                                 onPressed:
                                                                     () async {
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
+                                                                  setState(() {
+                                                                    _loading =
+                                                                        true;
+                                                                  });
+
+                                                                  final result =
+                                                                      await apiPushService
+                                                                          .disburse(
+                                                                    num.parse(
+                                                                        _amountController
+                                                                            .text),
+                                                                    widget
+                                                                        .currentPassword,
+                                                                  );
+
+                                                                  print(result);
+
+                                                                  // final result = await apiPushService
+                                                                  //     .disburseInitiation(
+                                                                  //   num.parse(_amountController.text),
+                                                                  //   _phoneController.text,
+                                                                  // );
+                                                                  setState(() {
+                                                                    _loading =
+                                                                        false;
+                                                                  });
+                                                                  if (result !=
+                                                                      null) {
+                                                                    showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (BuildContext
+                                                                              context) {
+                                                                        return Dialog(
+                                                                          shape:
+                                                                              RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(20.0),
+                                                                          ), //this right here
+                                                                          child:
+                                                                              Container(
+                                                                            height:
+                                                                                200,
+                                                                            width:
+                                                                                320,
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: const EdgeInsets.all(12.0),
+                                                                              child: Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Align(
+                                                                                    child: Icon(
+                                                                                      Icons.done,
+                                                                                      color: green,
+                                                                                      size: 40,
+                                                                                    ),
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    height: 16,
+                                                                                  ),
+                                                                                  Text(
+                                                                                    result,
+                                                                                    style: TextStyle(
+                                                                                      fontFamily: "Roboto",
+                                                                                      fontSize: 16.0,
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                      color: Colors.black,
+                                                                                    ),
+                                                                                    textAlign: TextAlign.center,
+                                                                                  ),
+                                                                                  Align(
+                                                                                    child: Padding(
+                                                                                      padding: const EdgeInsets.only(
+                                                                                        top: 26.0,
+                                                                                      ),
+                                                                                      child: FlatButton(
+                                                                                        onPressed: () async {
+                                                                                          Navigator.of(context).pop();
+                                                                                          Navigator.of(context).pop();
+                                                                                          Navigator.of(context).pop();
+                                                                                        },
+                                                                                        child: Container(
+                                                                                          padding: EdgeInsets.all(10.0),
+                                                                                          height: 40.5,
+                                                                                          width: 120,
+                                                                                          decoration: BoxDecoration(
+                                                                                            borderRadius: BorderRadius.circular(5.0),
+                                                                                            color: green.withOpacity(0.08),
+                                                                                          ),
+                                                                                          child: Center(
+                                                                                            child: Text(
+                                                                                              "Merci",
+                                                                                              style: TextStyle(
+                                                                                                fontSize: 14.0,
+                                                                                                color: green,
+                                                                                                fontWeight: FontWeight.w600,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    );
+                                                                  } else {
+                                                                    showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (BuildContext
+                                                                              context) {
+                                                                        return Dialog(
+                                                                          shape:
+                                                                              RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(20.0),
+                                                                          ), //this right here
+                                                                          child:
+                                                                              Container(
+                                                                            height:
+                                                                                200,
+                                                                            width:
+                                                                                320,
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: const EdgeInsets.all(12.0),
+                                                                              child: Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Align(
+                                                                                    child: Icon(
+                                                                                      Icons.warning_amber_rounded,
+                                                                                      color: red,
+                                                                                      size: 40,
+                                                                                    ),
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    height: 16,
+                                                                                  ),
+                                                                                  Text(
+                                                                                    'Un problème est survenu, veuillez reessayer!',
+                                                                                    style: TextStyle(
+                                                                                      fontFamily: "Roboto",
+                                                                                      fontSize: 16.0,
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                      color: Colors.black,
+                                                                                    ),
+                                                                                    textAlign: TextAlign.center,
+                                                                                  ),
+                                                                                  Align(
+                                                                                    child: Padding(
+                                                                                      padding: const EdgeInsets.only(
+                                                                                        top: 26.0,
+                                                                                      ),
+                                                                                      child: FlatButton(
+                                                                                        onPressed: () async {
+                                                                                          Navigator.of(context).pop();
+                                                                                        },
+                                                                                        child: Container(
+                                                                                          padding: EdgeInsets.all(10.0),
+                                                                                          height: 40.5,
+                                                                                          width: 120,
+                                                                                          decoration: BoxDecoration(
+                                                                                            borderRadius: BorderRadius.circular(5.0),
+                                                                                            color: red10,
+                                                                                          ),
+                                                                                          child: Center(
+                                                                                            child: Text(
+                                                                                              "OK",
+                                                                                              style: TextStyle(
+                                                                                                fontSize: 14.0,
+                                                                                                color: red,
+                                                                                                fontWeight: FontWeight.w600,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    );
+                                                                  }
                                                                 },
                                                                 child:
                                                                     Container(
@@ -570,7 +723,7 @@ class _DisbursePageState extends State<DisbursePage> {
                                                                           .all(
                                                                               10.0),
                                                                   height: 40.5,
-                                                                  width: 120,
+                                                                  width: 100,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     borderRadius:
@@ -581,7 +734,7 @@ class _DisbursePageState extends State<DisbursePage> {
                                                                   ),
                                                                   child: Center(
                                                                     child: Text(
-                                                                      "OK",
+                                                                      "OUI",
                                                                       style:
                                                                           TextStyle(
                                                                         fontSize:
@@ -589,27 +742,28 @@ class _DisbursePageState extends State<DisbursePage> {
                                                                         color:
                                                                             red,
                                                                         fontWeight:
-                                                                            FontWeight.w600,
+                                                                            FontWeight.w400,
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
+                                                          ],
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                );
-                                              },
-                                            );
-                                          }
+                                                ),
+                                              );
+                                            },
+                                          );
                                         } else {
                                           setState(() {
                                             _loading = false;
                                           });
                                           print("Un problème est survenu!");
+
                                           showDialog(
                                             context: context,
                                             builder: (BuildContext context) {

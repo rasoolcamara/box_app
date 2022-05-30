@@ -11,7 +11,7 @@ class PaydunyaService {
   ) async {
     final invoice = {
       "invoice": {
-        "total_amount": 200, //totalAmount,
+        "total_amount": totalAmount,
         "description": "Paiment de $totalAmount dépuis Box App",
       },
       "store": {

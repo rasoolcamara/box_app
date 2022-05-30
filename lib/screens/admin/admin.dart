@@ -276,7 +276,6 @@ class _AdminPageState extends State<AdminPage> {
                           // Se déconnecter
                           InkWell(
                             onTap: () {
-                              print("Se déconnecter");
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -285,8 +284,8 @@ class _AdminPageState extends State<AdminPage> {
                                       borderRadius: BorderRadius.circular(20.0),
                                     ), //this right here
                                     child: Container(
-                                      height: 250,
-                                      width: 320,
+                                      height: 300,
+                                      width: 400,
                                       child: Padding(
                                         padding: const EdgeInsets.all(12.0),
                                         child: Column(
@@ -321,10 +320,10 @@ class _AdminPageState extends State<AdminPage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: [
-                                                /* Padding(
+                                                Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                    top: 16.0,
+                                                    top: 45.0,
                                                   ),
                                                   child: FlatButton(
                                                     onPressed: () async {
@@ -335,7 +334,7 @@ class _AdminPageState extends State<AdminPage> {
                                                       padding:
                                                           EdgeInsets.all(10.0),
                                                       height: 40.5,
-                                                      width: 90,
+                                                      width: 100,
                                                       decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
@@ -344,7 +343,7 @@ class _AdminPageState extends State<AdminPage> {
                                                       ),
                                                       child: Center(
                                                         child: Text(
-                                                          "Annuler",
+                                                          "NON",
                                                           style: TextStyle(
                                                             fontSize: 12.0,
                                                             color: blue,
@@ -355,11 +354,11 @@ class _AdminPageState extends State<AdminPage> {
                                                       ),
                                                     ),
                                                   ),
-                                                ), */
+                                                ),
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                    top: 24.0,
+                                                    top: 45.0,
                                                     right: 0,
                                                     left: 0,
                                                   ),
@@ -388,7 +387,7 @@ class _AdminPageState extends State<AdminPage> {
                                                       padding:
                                                           EdgeInsets.all(10.0),
                                                       height: 40.5,
-                                                      width: 110,
+                                                      width: 100,
                                                       decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
@@ -397,7 +396,7 @@ class _AdminPageState extends State<AdminPage> {
                                                       ),
                                                       child: Center(
                                                         child: Text(
-                                                          "Déconnexion",
+                                                          "OUI",
                                                           style: TextStyle(
                                                             fontSize: 14.0,
                                                             color: red,

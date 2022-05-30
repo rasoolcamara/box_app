@@ -10,6 +10,7 @@ class User {
   String name;
   String phone;
   String phoneWithIndicatif;
+  String countrCode;
   String email;
   String balance;
   String masterKey;
@@ -22,6 +23,7 @@ class User {
     this.phone,
     this.email,
     this.phoneWithIndicatif,
+    this.countrCode,
     this.token,
     this.clientToken,
     this.balance,
@@ -34,6 +36,7 @@ class User {
       name: json['name'] as String,
       phone: json['phone'] as String,
       phoneWithIndicatif: json['phone_with_indicatif'] as String,
+      countrCode: json['country_code'] as String,
       balance: json['balance'] as String,
       email: json['email'] as String,
       masterKey: json['master_key'] as String,

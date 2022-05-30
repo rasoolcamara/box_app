@@ -201,38 +201,38 @@ class _PaymentPageState extends State<PaymentPage> {
                                                   fontWeight: FontWeight.w500,
                                                   color: Colors.black,
                                                 ),
-                                                // prefixIcon: CountryCodePicker(
-                                                //   showCountryOnly: false,
-                                                //   showFlagMain: true,
-                                                //   showOnlyCountryWhenClosed:
-                                                //       false,
-                                                //   showFlagDialog: true,
-                                                //   searchStyle: TextStyle(
-                                                //     fontSize: 15,
-                                                //     fontWeight: FontWeight.w500,
-                                                //     color: Colors.black,
-                                                //   ),
-                                                //   textStyle: TextStyle(
-                                                //     fontSize: 15,
-                                                //     fontWeight: FontWeight.w500,
-                                                //     color: Colors.black,
-                                                //   ),
-                                                //   dialogTextStyle: TextStyle(
-                                                //     fontSize: 15,
-                                                //     fontWeight: FontWeight.w500,
-                                                //     color: Colors.black,
-                                                //   ),
-                                                //   flagWidth: 30,
-                                                //   hideSearch: false,
-                                                //   dialogSize: Size(320, 600),
-                                                //   initialSelection:
-                                                //       currentCoutry,
-                                                //   onChanged: (country) {
-                                                //     _countryCode =
-                                                //         country.dialCode;
-                                                //     print(country.name);
-                                                //   },
-                                                // ),
+                                                prefixIcon: CountryCodePicker(
+                                                  showCountryOnly: false,
+                                                  showFlagMain: true,
+                                                  showOnlyCountryWhenClosed:
+                                                      false,
+                                                  showFlagDialog: true,
+                                                  searchStyle: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.black,
+                                                  ),
+                                                  textStyle: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.black,
+                                                  ),
+                                                  dialogTextStyle: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.black,
+                                                  ),
+                                                  flagWidth: 30,
+                                                  hideSearch: false,
+                                                  dialogSize: Size(320, 600),
+                                                  initialSelection:
+                                                      currentCoutry,
+                                                  onChanged: (country) {
+                                                    _countryCode =
+                                                        country.dialCode;
+                                                    print(country.name);
+                                                  },
+                                                ),
                                                 labelStyle: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w500,
@@ -362,421 +362,535 @@ class _PaymentPageState extends State<PaymentPage> {
                                 ),
                                 child: FlatButton(
                                   onPressed: () async {
-                                    setState(() {
-                                      _loading = true;
-                                    });
-                                    final checkoutInvoice =
-                                        await paydunyaService.checkoutInvoice(
-                                      num.parse(_amountController.text),
-                                    );
-                                    if (checkoutInvoice != null) {
-                                      var paymentResult = false;
-                                      var paymentResultMessage = "";
-
-                                      var _phone = _phoneController
-                                          .text; // _countryCode +
-                                      switch (widget.wallet.name) {
-                                        case "Free Money":
-                                          paymentResult = await freeMoneyService
-                                              .payment(_phone);
-                                          break;
-                                        case "E Money":
-                                          paymentResult = await eMoneyService
-                                              .payment(_phone);
-                                          break;
-                                        case "Wave":
-                                          paymentResult =
-                                              await waveService.payment(_phone);
-                                          break;
-                                        case "ORANGE MONEY CI":
-                                          paymentResultMessage =
-                                              await omciService
-                                                  .payment('0779077285');
-                                          break;
-                                        case "WizAll Money":
-                                          // paymentResult = true;
-                                          paymentResult = await wizAllService
-                                              .paymentRequest(_phone);
-                                          print(paymentResult);
-                                          break;
-                                        case "MOOV CI":
-                                          paymentResultMessage =
-                                              await moovciService
-                                                  .payment(_phone);
-                                          break;
-                                        case "MTN CI":
-                                          paymentResult = await mtnciService
-                                              .payment(_phone);
-                                          break;
-                                        case "MOOV BENIN":
-                                          paymentResultMessage =
-                                              await moovbjService
-                                                  .payment(_phone);
-                                          break;
-                                        case "MTN BENIN":
-                                          paymentResult = await mtnbjService
-                                              .payment(_phone);
-                                          break;
-                                        default:
-                                      }
+                                    if (num.tryParse(_amountController.text) !=
+                                        null) {
                                       setState(() {
-                                        _loading = false;
+                                        _loading = true;
                                       });
-                                      if (paymentResult == true) {
-                                        if (widget.wallet.name ==
-                                            "WizAll Money") {
-                                          Navigator.of(context).push(
-                                            PageRouteBuilder(
-                                              pageBuilder: (_, __, ___) =>
-                                                  WizallOTPConfirmPage(
-                                                wallet:
-                                                    walletsByCountry["Sénégal"]
-                                                        [3],
-                                                phone: _phone,
+                                      final checkoutInvoice =
+                                          await paydunyaService.checkoutInvoice(
+                                        num.parse(_amountController.text),
+                                      );
+                                      if (checkoutInvoice != null) {
+                                        var paymentResult = false;
+                                        var paymentResultMessage = "";
+
+                                        // print(_phoneController.text);
+
+                                        var _phone = _countryCode +
+                                            _phoneController.text;
+
+                                        switch (widget.wallet.name) {
+                                          case "FREE MONEY SENEGAL":
+                                            paymentResult =
+                                                await freeMoneyService
+                                                    .payment(_phone);
+                                            break;
+                                          case "EXPRESSO SN":
+                                            paymentResult = await eMoneyService
+                                                .payment(_phone);
+                                            break;
+                                          case "WAVE SENEGAL":
+                                            paymentResult = await waveService
+                                                .payment(_phone);
+                                            break;
+                                          case "ORANGE MONEY CI":
+                                            paymentResultMessage =
+                                                await omciService
+                                                    .payment('0779077285');
+                                            break;
+                                          case "WIZALL SENEGAL":
+                                            // paymentResult = true;
+                                            paymentResult = await wizAllService
+                                                .paymentRequest(_phone);
+                                            print(paymentResult);
+                                            break;
+                                          case "MOOV CI":
+                                            paymentResultMessage =
+                                                await moovciService
+                                                    .payment(_phone);
+                                            break;
+                                          case "MTN CI":
+                                            paymentResult = await mtnciService
+                                                .payment(_phone);
+                                            break;
+                                          case "MOOV BENIN":
+                                            paymentResultMessage =
+                                                await moovbjService
+                                                    .payment(_phone);
+                                            break;
+                                          case "MTN BENIN":
+                                            paymentResult = await mtnbjService
+                                                .payment(_phone);
+                                            break;
+                                          default:
+                                        }
+                                        setState(() {
+                                          _loading = false;
+                                        });
+                                        if (paymentResult == true) {
+                                          if (widget.wallet.name ==
+                                              "WIZALL SENEGAL") {
+                                            Navigator.of(context).push(
+                                              PageRouteBuilder(
+                                                pageBuilder: (_, __, ___) =>
+                                                    WizallOTPConfirmPage(
+                                                  wallet: walletsByCountry[
+                                                      "Sénégal"][3],
+                                                  phone: _phone,
+                                                ),
                                               ),
-                                            ),
-                                          );
-                                        } else {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return Dialog(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ), //this right here
-                                                child: Container(
-                                                  height: 250,
-                                                  width: 320,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            12.0),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Align(
-                                                          child: Container(
-                                                            height: 50,
-                                                            width: 50,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    10.0),
-                                                              ),
-                                                              image:
-                                                                  DecorationImage(
-                                                                image:
-                                                                    AssetImage(
-                                                                  'assets/images/horloge_murale.png',
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 24,
-                                                        ),
-                                                        Text(
-                                                          'Veuillez demander à votre client de finaliser le paiement sur son téléphone!',
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                "Roboto",
-                                                            fontSize: 16.0,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color: Colors.black,
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        ),
-                                                        Align(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                              top: 26.0,
-                                                            ),
-                                                            child: FlatButton(
-                                                              onPressed:
-                                                                  () async {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pushReplacement(
-                                                                  MaterialPageRoute(
-                                                                    builder: (_) =>
-                                                                        HomeScreen(),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Container(
-                                                                padding:
-                                                                    EdgeInsets
+                                            );
+                                          } else {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return Dialog(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                  ), //this right here
+                                                  child: Container(
+                                                    height: 250,
+                                                    width: 320,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              12.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Align(
+                                                            child: Container(
+                                                              height: 50,
+                                                              width: 50,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
                                                                         .all(
-                                                                            10.0),
-                                                                height: 40.5,
-                                                                width: 120,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5.0),
-                                                                  color: orange
-                                                                      .withOpacity(
-                                                                          0.08),
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0),
                                                                 ),
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    "OK",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      color:
-                                                                          orange,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
+                                                                image:
+                                                                    DecorationImage(
+                                                                  image:
+                                                                      AssetImage(
+                                                                    'assets/images/horloge_murale.png',
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 24,
+                                                          ),
+                                                          Text(
+                                                            'Veuillez demander à votre client de finaliser le paiement sur son téléphone!',
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  "Roboto",
+                                                              fontSize: 16.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                          Align(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                top: 26.0,
+                                                              ),
+                                                              child: FlatButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pushReplacement(
+                                                                    MaterialPageRoute(
+                                                                      builder:
+                                                                          (_) =>
+                                                                              HomeScreen(),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              10.0),
+                                                                  height: 40.5,
+                                                                  width: 120,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0),
+                                                                    color: orange
+                                                                        .withOpacity(
+                                                                            0.08),
+                                                                  ),
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "OK",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        color:
+                                                                            orange,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                          );
+                                                );
+                                              },
+                                            );
+                                          }
+                                        } else {
+                                          if (widget.wallet.name == "MOOV CI") {
+                                            print("Un problème est survenu!");
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return Dialog(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                  ), //this right here
+                                                  child: Container(
+                                                    height: 240,
+                                                    width: 320,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              12.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Align(
+                                                            child: Icon(
+                                                              Icons
+                                                                  .warning_amber_rounded,
+                                                              color: red,
+                                                              size: 40,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 16,
+                                                          ),
+                                                          Text(
+                                                            paymentResultMessage,
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  "Roboto",
+                                                              fontSize: 16.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                          Align(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                top: 26.0,
+                                                              ),
+                                                              child: FlatButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              10.0),
+                                                                  height: 40.5,
+                                                                  width: 120,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0),
+                                                                    color:
+                                                                        red10,
+                                                                  ),
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "OK",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        color:
+                                                                            red,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          } else {
+                                            print("Un problème est survenu!");
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return Dialog(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                  ), //this right here
+                                                  child: Container(
+                                                    height: 240,
+                                                    width: 320,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              12.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Align(
+                                                            child: Icon(
+                                                              Icons
+                                                                  .warning_amber_rounded,
+                                                              color: red,
+                                                              size: 40,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 16,
+                                                          ),
+                                                          Text(
+                                                            "Assurez-vous d'avoir saisi un numéro valable et ayant assez de fonds!",
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  "Roboto",
+                                                              fontSize: 16.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                          Align(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                top: 26.0,
+                                                              ),
+                                                              child: FlatButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              10.0),
+                                                                  height: 40.5,
+                                                                  width: 120,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0),
+                                                                    color:
+                                                                        red10,
+                                                                  ),
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "OK",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        color:
+                                                                            red,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          }
                                         }
                                       } else {
-                                        if (widget.wallet.name == "MOOV CI") {
-                                          print("Un problème est survenu!");
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return Dialog(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ), //this right here
-                                                child: Container(
-                                                  height: 240,
-                                                  width: 320,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            12.0),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Align(
-                                                          child: Icon(
-                                                            Icons
-                                                                .warning_amber_rounded,
-                                                            color: red,
-                                                            size: 40,
+                                        print("Un problème est survenu!");
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return Dialog(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                              ), //this right here
+                                              child: Container(
+                                                height: 200,
+                                                width: 320,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      12.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Align(
+                                                        child: Icon(
+                                                          Icons
+                                                              .warning_amber_rounded,
+                                                          color: red,
+                                                          size: 40,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 16,
+                                                      ),
+                                                      Text(
+                                                        'Un problème est survenu veuillez réessayer!',
+                                                        style: TextStyle(
+                                                          fontFamily: "Roboto",
+                                                          fontSize: 16.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: Colors.black,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
+                                                      Align(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                            top: 26.0,
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 16,
-                                                        ),
-                                                        Text(
-                                                          paymentResultMessage,
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                "Roboto",
-                                                            fontSize: 16.0,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: Colors.black,
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        ),
-                                                        Align(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                              top: 26.0,
-                                                            ),
-                                                            child: FlatButton(
-                                                              onPressed:
-                                                                  () async {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                              child: Container(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .all(
-                                                                            10.0),
-                                                                height: 40.5,
-                                                                width: 120,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5.0),
-                                                                  color: red10,
-                                                                ),
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    "OK",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      color:
-                                                                          red,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                    ),
+                                                          child: FlatButton(
+                                                            onPressed:
+                                                                () async {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(
+                                                                          10.0),
+                                                              height: 40.5,
+                                                              width: 120,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5.0),
+                                                                color: red10,
+                                                              ),
+                                                              child: Center(
+                                                                child: Text(
+                                                                  "OK",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        14.0,
+                                                                    color: red,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                              );
-                                            },
-                                          );
-                                        } else {
-                                          print("Un problème est survenu!");
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return Dialog(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ), //this right here
-                                                child: Container(
-                                                  height: 240,
-                                                  width: 320,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            12.0),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Align(
-                                                          child: Icon(
-                                                            Icons
-                                                                .warning_amber_rounded,
-                                                            color: red,
-                                                            size: 40,
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 16,
-                                                        ),
-                                                        Text(
-                                                          "Assurez-vous d'avoir saisi un numéro valable et ayant assez de fonds!",
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                "Roboto",
-                                                            fontSize: 16.0,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: Colors.black,
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        ),
-                                                        Align(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                              top: 26.0,
-                                                            ),
-                                                            child: FlatButton(
-                                                              onPressed:
-                                                                  () async {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                              child: Container(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .all(
-                                                                            10.0),
-                                                                height: 40.5,
-                                                                width: 120,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5.0),
-                                                                  color: red10,
-                                                                ),
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    "OK",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      color:
-                                                                          red,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        }
+                                              ),
+                                            );
+                                          },
+                                        );
                                       }
                                     } else {
                                       print("Un problème est survenu!");
@@ -811,17 +925,19 @@ class _PaymentPageState extends State<PaymentPage> {
                                                     SizedBox(
                                                       height: 16,
                                                     ),
-                                                    Text(
-                                                      'Un problème est survenu veuillez réessayer!',
-                                                      style: TextStyle(
-                                                        fontFamily: "Roboto",
-                                                        fontSize: 16.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: Colors.black,
+                                                    Center(
+                                                      child: Text(
+                                                        'Saisissez un montant valable!',
+                                                        style: TextStyle(
+                                                          fontFamily: "Roboto",
+                                                          fontSize: 16.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: Colors.black,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.center,
                                                       ),
-                                                      textAlign:
-                                                          TextAlign.center,
                                                     ),
                                                     Align(
                                                       child: Padding(

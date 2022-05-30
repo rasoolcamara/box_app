@@ -653,7 +653,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                                   pageBuilder: (_, __, ___) =>
                                                       PaymentPage(
                                                     wallet: walletsByCountry[
-                                                        currentCoutry][3],
+                                                        currentCoutry][4],
                                                   ),
                                                 ),
                                               );
