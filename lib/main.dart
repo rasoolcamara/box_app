@@ -29,7 +29,6 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-
     locationService.determinePosition().then((value) {
       print("hereeee");
       print(value.latitude);
@@ -46,15 +45,16 @@ class _AppState extends State<App> {
     // print(placemarks);
 
     Placemark place = placemarks[0];
+
     currentCoutry = place.isoCountryCode;
     // print("L'adresse");
 
     // print(place);
     // print(place.isoCountryCode);
 
-    // print("POSITIONN ACTUEL");
+    print("POSITIONN ACTUEL");
 
-    // print(currentCoutry);
+    print(currentCoutry);
   }
 
   final spinkit = SpinKitRing(
