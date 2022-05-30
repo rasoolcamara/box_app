@@ -11,7 +11,7 @@ String invoiceToken = '';
 String invoiceUrl = '';
 String activeToken = '';
 String activeUserToken = '';
-String currentCoutry = "CI";
+String currentCoutry = "SN";
 int userId;
 
 Map<String, List<Wallet>> walletsByCountry = {

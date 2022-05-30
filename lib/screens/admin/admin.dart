@@ -88,7 +88,7 @@ class _AdminPageState extends State<AdminPage> {
                         children: <Widget>[
                           Container(
                             height: 90,
-                            width: 350,
+                            // width: 350,
                             decoration: BoxDecoration(
                               // image: DecorationImage(
                               //   image: AssetImage('assets/images/home.png'),
@@ -99,7 +99,9 @@ class _AdminPageState extends State<AdminPage> {
                                 Radius.circular(10.0),
                               ),
                             ),
-                            padding: const EdgeInsets.all(0.0),
+                            padding: const EdgeInsets.only(
+                              left: 8.0,
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.only(right: 0.0),
                               child: ListTile(

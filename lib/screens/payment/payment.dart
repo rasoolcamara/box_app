@@ -135,7 +135,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              // Email and Phone
+                              // Phone
                               Padding(
                                 padding: const EdgeInsets.only(
                                     left: 25.0, right: 25.0, top: 60.0),
@@ -201,38 +201,38 @@ class _PaymentPageState extends State<PaymentPage> {
                                                   fontWeight: FontWeight.w500,
                                                   color: Colors.black,
                                                 ),
-                                                prefixIcon: CountryCodePicker(
-                                                  showCountryOnly: false,
-                                                  showFlagMain: true,
-                                                  showOnlyCountryWhenClosed:
-                                                      false,
-                                                  showFlagDialog: true,
-                                                  searchStyle: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black,
-                                                  ),
-                                                  textStyle: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black,
-                                                  ),
-                                                  dialogTextStyle: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black,
-                                                  ),
-                                                  flagWidth: 30,
-                                                  hideSearch: false,
-                                                  dialogSize: Size(320, 600),
-                                                  initialSelection:
-                                                      currentCoutry,
-                                                  onChanged: (country) {
-                                                    _countryCode =
-                                                        country.dialCode;
-                                                    print(country.name);
-                                                  },
-                                                ),
+                                                // prefixIcon: CountryCodePicker(
+                                                //   showCountryOnly: false,
+                                                //   showFlagMain: true,
+                                                //   showOnlyCountryWhenClosed:
+                                                //       false,
+                                                //   showFlagDialog: true,
+                                                //   searchStyle: TextStyle(
+                                                //     fontSize: 15,
+                                                //     fontWeight: FontWeight.w500,
+                                                //     color: Colors.black,
+                                                //   ),
+                                                //   textStyle: TextStyle(
+                                                //     fontSize: 15,
+                                                //     fontWeight: FontWeight.w500,
+                                                //     color: Colors.black,
+                                                //   ),
+                                                //   dialogTextStyle: TextStyle(
+                                                //     fontSize: 15,
+                                                //     fontWeight: FontWeight.w500,
+                                                //     color: Colors.black,
+                                                //   ),
+                                                //   flagWidth: 30,
+                                                //   hideSearch: false,
+                                                //   dialogSize: Size(320, 600),
+                                                //   initialSelection:
+                                                //       currentCoutry,
+                                                //   onChanged: (country) {
+                                                //     _countryCode =
+                                                //         country.dialCode;
+                                                //     print(country.name);
+                                                //   },
+                                                // ),
                                                 labelStyle: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w500,
@@ -373,8 +373,8 @@ class _PaymentPageState extends State<PaymentPage> {
                                       var paymentResult = false;
                                       var paymentResultMessage = "";
 
-                                      var _phone =
-                                          _countryCode + _phoneController.text;
+                                      var _phone = _phoneController
+                                          .text; // _countryCode +
                                       switch (widget.wallet.name) {
                                         case "Free Money":
                                           paymentResult = await freeMoneyService
