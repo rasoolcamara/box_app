@@ -544,7 +544,12 @@ class _DisbursePageState extends State<DisbursePage> {
                                                                         false;
                                                                   });
                                                                   if (result !=
-                                                                      null) {
+                                                                          null &&
+                                                                      result !=
+                                                                          "Une erreur est survenue sur serveur, réessayer plutard !") {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
                                                                     showDialog(
                                                                       context:
                                                                           context,
@@ -631,6 +636,9 @@ class _DisbursePageState extends State<DisbursePage> {
                                                                       },
                                                                     );
                                                                   } else {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
                                                                     showDialog(
                                                                       context:
                                                                           context,
@@ -646,7 +654,7 @@ class _DisbursePageState extends State<DisbursePage> {
                                                                           child:
                                                                               Container(
                                                                             height:
-                                                                                200,
+                                                                                270,
                                                                             width:
                                                                                 320,
                                                                             child:
@@ -683,6 +691,7 @@ class _DisbursePageState extends State<DisbursePage> {
                                                                                       ),
                                                                                       child: FlatButton(
                                                                                         onPressed: () async {
+                                                                                          Navigator.of(context).pop();
                                                                                           Navigator.of(context).pop();
                                                                                         },
                                                                                         child: Container(

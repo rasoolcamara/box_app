@@ -340,6 +340,7 @@ class _LoginPageState extends State<LoginPage> {
                                         setState(() {
                                           _loading = true;
                                         });
+                                        
                                         final application =
                                             await applicationServiceService
                                                 .login(

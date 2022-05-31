@@ -82,12 +82,10 @@ class ApiPushService {
     num totalAmount,
     String currentPassword,
   ) async {
-    print("THE CURRENT PASSWORD");
-    print(currentPassword);
     final response = await http.post(
       Uri.parse('https://preview56.paydunya.com/api/v1/withdraws'),
       body: jsonEncode({
-        "amount": totalAmount.toString(),
+        "amount": totalAmount,
         "current_password": currentPassword,
       }),
       headers: <String, String>{
@@ -96,15 +94,22 @@ class ApiPushService {
       },
     );
 
-    print("Génération du checkout invoice");
-    print(response.body);
-    var body = jsonDecode(response.body);
 
-    print(body['success'].runtimeType);
-    if (body['success']) {
-      return body['message'];
-    } else {
-      return body['message'];
+
+    try {
+      print("Génération du checkout invoice");
+      print(response.body);
+      var body = jsonDecode(response.body);
+
+      print(body['success'].runtimeType);
+
+      if (body['success']) {
+        return body['message'];
+      } else {
+        return body['message'];
+      }
+    } catch (e) {
+      return "Une erreur est survenue sur serveur, réessayer plutard !";
     }
   }
 
