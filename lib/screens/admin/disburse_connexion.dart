@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use
 
 import 'dart:io';
 import 'package:box_app/app_properties.dart';
@@ -332,35 +332,142 @@ class _DisburseConnexionPageState extends State<DisburseConnexionPage> {
                                   ),
                                   child: FlatButton(
                                     onPressed: () async {
-                                      setState(() {
-                                        _loading = true;
-                                      });
-                                      final application =
-                                          await applicationServiceService
-                                              .loginWithOtherCrendentials(
-                                        _passwordController.text,
-                                        email: _phoneController.text,
-                                      );
-
-                                      setState(() {
-                                        _loading = false;
-                                      });
-                                      if (application != null) {
-                                        print("Athentification Réussi!");
-                                        print(application.toString());
-
-                                        Navigator.of(context).push(
-                                          PageRouteBuilder(
-                                            pageBuilder: (_, __, ___) =>
-                                                DisbursePage(
-                                              currentPassword:
-                                                  _passwordController.text,
-                                            ),
-                                          ),
+                                      if (_phoneController.text.isNotEmpty &&
+                                          _passwordController.text.isNotEmpty) {
+                                        setState(() {
+                                          _loading = true;
+                                        });
+                                        final application =
+                                            await applicationServiceService
+                                                .loginWithOtherCrendentials(
+                                          _passwordController.text,
+                                          email: _phoneController.text,
                                         );
-                                      } else {
-                                        print("Un problème est survenu!");
 
+                                        setState(() {
+                                          _loading = false;
+                                        });
+                                        if (application != null) {
+                                          print("Athentification Réussi!");
+                                          print(application.toString());
+
+                                          Navigator.of(context).push(
+                                            PageRouteBuilder(
+                                              pageBuilder: (_, __, ___) =>
+                                                  DisbursePage(
+                                                currentPassword:
+                                                    _passwordController.text,
+                                              ),
+                                            ),
+                                          );
+                                        } else {
+                                          print("Un problème est survenu!");
+
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Dialog(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ), //this right here
+                                                child: Container(
+                                                  height: 200,
+                                                  width: 320,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            12.0),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Align(
+                                                          child: Icon(
+                                                            Icons
+                                                                .warning_amber_rounded,
+                                                            color: red,
+                                                            size: 40,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 16,
+                                                        ),
+                                                        Text(
+                                                          'Veuillez vérifier les données saisies!',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                "Roboto",
+                                                            fontSize: 16.0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: Colors.black,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                        Align(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                              top: 26.0,
+                                                            ),
+                                                            child: FlatButton(
+                                                              onPressed:
+                                                                  () async {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                              child: Container(
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            10.0),
+                                                                height: 40.5,
+                                                                width: 120,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5.0),
+                                                                  color: red10,
+                                                                ),
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "OK",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      color:
+                                                                          red,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        }
+                                      } else {
                                         showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
@@ -381,7 +488,7 @@ class _DisburseConnexionPageState extends State<DisburseConnexionPage> {
                                                             .center,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
-                                                            .start,
+                                                            .center,
                                                     children: [
                                                       Align(
                                                         child: Icon(
@@ -395,7 +502,7 @@ class _DisburseConnexionPageState extends State<DisburseConnexionPage> {
                                                         height: 16,
                                                       ),
                                                       Text(
-                                                        'Veuillez vérifier les données saisies!',
+                                                        'Les champs sont obligatoires!',
                                                         style: TextStyle(
                                                           fontFamily: "Roboto",
                                                           fontSize: 16.0,
