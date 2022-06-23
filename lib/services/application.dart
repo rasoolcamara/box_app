@@ -120,6 +120,8 @@ class ApplicationService {
       },
     );
 
+    print("jsonDecode");
+    print(jsonDecode(response.body));
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
 
@@ -128,8 +130,12 @@ class ApplicationService {
       String log = phone ?? email;
       Application application = await loginStep2(password, log);
 
-      userId = application.user.id;
-      return application;
+      if (application != null) {
+        userId = application.user.id;
+        return application;
+      } else {
+        return null;
+      }
     } else {
       return null;
     }

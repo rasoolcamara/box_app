@@ -6,6 +6,7 @@ import 'package:box_app/models/wallet.dart';
 import 'package:box_app/screens/home/home.dart';
 import 'package:box_app/services/payment/api_dmp/dmp.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -603,12 +604,12 @@ class _DmpPageState extends State<DmpPage> {
                                                   null &&
                                               num.parse(
                                                       _amountController.text) >
-                                                  501) {
+                                                  499) {
                                             if (num.tryParse(_phoneController
                                                         .text) !=
                                                     null ||
-                                                _emailController.text
-                                                    .contains("@")) {
+                                                EmailValidator.validate(
+                                                    _emailController.text)) {
                                               print("dfsdf");
                                               setState(() {
                                                 _loading = true;
@@ -866,8 +867,8 @@ class _DmpPageState extends State<DmpPage> {
                                                 );
                                               }
                                             } else {
-                                              print(_emailController.text
-                                                  .contains("@"));
+                                              print(EmailValidator.validate(
+                                                  _emailController.text));
                                               showDialog(
                                                 context: context,
                                                 builder:
@@ -910,9 +911,8 @@ class _DmpPageState extends State<DmpPage> {
                                                                 _emailController
                                                                             .text
                                                                             .isNotEmpty &&
-                                                                        !_emailController
-                                                                            .text
-                                                                            .contains("@")
+                                                                        !EmailValidator.validate(
+                                                                            _emailController.text)
                                                                     ? "L'Email saisi n'est pas valide!"
                                                                     : "Le numéro saisi n'est pas valide!",
                                                                 style:
