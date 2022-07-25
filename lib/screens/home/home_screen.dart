@@ -145,591 +145,6 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                           ),
                           // _walletsCards(context),
                           _walletList(context),
-
-                          /* Container(
-                            height: 250,
-                            width: MediaQuery.of(context).size.width,
-                            padding: const EdgeInsets.only(
-                              top: 10,
-                              left: 16.0,
-                              right: 16.0,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                currentCoutry == "SN"
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                PageRouteBuilder(
-                                                  pageBuilder: (_, __, ___) =>
-                                                      PaymentPage(
-                                                    wallet: walletsByCountry[
-                                                        currentCoutry][0],
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            child: Material(
-                                              elevation: 5,
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(50),
-                                              ),
-                                              child: Container(
-                                                height: 85,
-                                                width: 85,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(50),
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color:
-                                                          gray.withOpacity(0.1),
-                                                      blurRadius: 4.0,
-                                                      spreadRadius: 0.0,
-                                                      offset: Offset(0.0, 0.0),
-                                                    )
-                                                  ],
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Image(
-                                                    image: AssetImage(
-                                                      walletsByCountry[
-                                                              currentCoutry][0]
-                                                          .logo,
-                                                    ),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                PageRouteBuilder(
-                                                  pageBuilder: (_, __, ___) =>
-                                                      PaymentPage(
-                                                    wallet: walletsByCountry[
-                                                        currentCoutry][1],
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            child: Material(
-                                              elevation: 5,
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(50),
-                                              ),
-                                              child: Container(
-                                                height: 85,
-                                                width: 85,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(50),
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color:
-                                                          gray.withOpacity(0.1),
-                                                      blurRadius: 4.0,
-                                                      spreadRadius: 0.0,
-                                                      offset: Offset(0.0, 0.0),
-                                                    )
-                                                  ],
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Image(
-                                                    image: AssetImage(
-                                                      walletsByCountry[
-                                                              currentCoutry][1]
-                                                          .logo,
-                                                    ),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                PageRouteBuilder(
-                                                  pageBuilder: (_, __, ___) =>
-                                                      PaymentPage(
-                                                    wallet: walletsByCountry[
-                                                        currentCoutry][2],
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            child: Material(
-                                              elevation: 5,
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(50),
-                                              ),
-                                              child: Container(
-                                                height: 85,
-                                                width: 85,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(50),
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color:
-                                                          gray.withOpacity(0.1),
-                                                      blurRadius: 4.0,
-                                                      spreadRadius: 0.0,
-                                                      offset: Offset(0.0, 0.0),
-                                                    )
-                                                  ],
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Image(
-                                                    image: AssetImage(
-                                                      walletsByCountry[
-                                                              currentCoutry][2]
-                                                          .logo,
-                                                    ),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    : currentCoutry == "BJ"
-                                        ? Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  Navigator.of(context).push(
-                                                    PageRouteBuilder(
-                                                      pageBuilder:
-                                                          (_, __, ___) =>
-                                                              PaymentPage(
-                                                        wallet: walletsByCountry[
-                                                            currentCoutry][0],
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                                child: Material(
-                                                  elevation: 5,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(50),
-                                                  ),
-                                                  child: Container(
-                                                    height: 85,
-                                                    width: 85,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                        Radius.circular(50),
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: gray
-                                                              .withOpacity(0.1),
-                                                          blurRadius: 4.0,
-                                                          spreadRadius: 0.0,
-                                                          offset:
-                                                              Offset(0.0, 0.0),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5.0),
-                                                      child: Image(
-                                                        image: AssetImage(
-                                                          walletsByCountry[
-                                                                  currentCoutry][0]
-                                                              .logo,
-                                                        ),
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 30,
-                                              ),
-                                              InkWell(
-                                                onTap: () {
-                                                  Navigator.of(context).push(
-                                                    PageRouteBuilder(
-                                                      pageBuilder:
-                                                          (_, __, ___) =>
-                                                              PaymentPage(
-                                                        wallet: walletsByCountry[
-                                                            currentCoutry][1],
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                                child: Material(
-                                                  elevation: 5,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(50),
-                                                  ),
-                                                  child: Container(
-                                                    height: 85,
-                                                    width: 85,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                        Radius.circular(50),
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: gray
-                                                              .withOpacity(0.1),
-                                                          blurRadius: 4.0,
-                                                          spreadRadius: 0.0,
-                                                          offset:
-                                                              Offset(0.0, 0.0),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5.0),
-                                                      child: Image(
-                                                        image: AssetImage(
-                                                          walletsByCountry[
-                                                                  currentCoutry][1]
-                                                              .logo,
-                                                        ),
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        : currentCoutry == "CI"
-                                            ? Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {
-                                                      print(walletsByCountry[
-                                                          currentCoutry][0]);
-                                                      Navigator.of(context)
-                                                          .push(
-                                                        PageRouteBuilder(
-                                                          pageBuilder:
-                                                              (_, __, ___) =>
-                                                                  PaymentPage(
-                                                            wallet: walletsByCountry[
-                                                                currentCoutry][0],
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                    child: Material(
-                                                      elevation: 5,
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                        Radius.circular(50),
-                                                      ),
-                                                      child: Container(
-                                                        height: 85,
-                                                        width: 85,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                            Radius.circular(50),
-                                                          ),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: gray
-                                                                  .withOpacity(
-                                                                      0.1),
-                                                              blurRadius: 4.0,
-                                                              spreadRadius: 0.0,
-                                                              offset: Offset(
-                                                                  0.0, 0.0),
-                                                            )
-                                                          ],
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(5.0),
-                                                          child: Image(
-                                                            image: AssetImage(
-                                                              walletsByCountry[
-                                                                      currentCoutry][0]
-                                                                  .logo,
-                                                            ),
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 30,
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () {
-                                                      print(walletsByCountry[
-                                                              currentCoutry][1]
-                                                          .name);
-                                                      Navigator.of(context)
-                                                          .push(
-                                                        PageRouteBuilder(
-                                                          pageBuilder:
-                                                              (_, __, ___) =>
-                                                                  PaymentPage(
-                                                            wallet: walletsByCountry[
-                                                                currentCoutry][1],
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                    child: Material(
-                                                      elevation: 5,
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                        Radius.circular(50),
-                                                      ),
-                                                      child: Container(
-                                                        height: 85,
-                                                        width: 85,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                            Radius.circular(50),
-                                                          ),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: gray
-                                                                  .withOpacity(
-                                                                      0.1),
-                                                              blurRadius: 4.0,
-                                                              spreadRadius: 0.0,
-                                                              offset: Offset(
-                                                                  0.0, 0.0),
-                                                            )
-                                                          ],
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(5.0),
-                                                          child: Image(
-                                                            image: AssetImage(
-                                                              walletsByCountry[
-                                                                      currentCoutry][1]
-                                                                  .logo,
-                                                            ),
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              )
-                                            : Text(
-                                                "L'application Box n'est pas disponible dans cette région!",
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                currentCoutry == "SN"
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                PageRouteBuilder(
-                                                  pageBuilder: (_, __, ___) =>
-                                                      PaymentPage(
-                                                    wallet: walletsByCountry[
-                                                        currentCoutry][3],
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            child: Material(
-                                              elevation: 5,
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(50),
-                                              ),
-                                              child: Container(
-                                                height: 85,
-                                                width: 85,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(50),
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color:
-                                                          gray.withOpacity(0.1),
-                                                      blurRadius: 4.0,
-                                                      spreadRadius: 0.0,
-                                                      offset: Offset(0.0, 0.0),
-                                                    )
-                                                  ],
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Image(
-                                                    image: AssetImage(
-                                                      walletsByCountry[
-                                                              currentCoutry][3]
-                                                          .logo,
-                                                    ),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                PageRouteBuilder(
-                                                  pageBuilder: (_, __, ___) =>
-                                                      PaymentPage(
-                                                    wallet: walletsByCountry[
-                                                        currentCoutry][4],
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            child: Material(
-                                              elevation: 5,
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(50),
-                                              ),
-                                              child: Container(
-                                                height: 85,
-                                                width: 85,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(50),
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color:
-                                                          gray.withOpacity(0.1),
-                                                      blurRadius: 4.0,
-                                                      spreadRadius: 0.0,
-                                                      offset: Offset(0.0, 0.0),
-                                                    )
-                                                  ],
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Image(
-                                                    image: AssetImage(
-                                                      walletsByCountry[
-                                                              currentCoutry][3]
-                                                          .logo,
-                                                    ),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {},
-                                            child: Container(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              height: 80,
-                                              width: 80,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(50.0),
-                                                ),
-                                                border: Border.all(
-                                                  color: Colors.white,
-                                                  width: 0.0,
-                                                ),
-                                              ),
-                                              child: Image(
-                                                height: 80,
-                                                width: 80,
-                                                color: Colors.white,
-                                                image: AssetImage(
-                                                  walletsByCountry[
-                                                          currentCoutry][1]
-                                                      .logo,
-                                                ),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    : Container(),
-                              ],
-                            ),
-                          ), */
                           SizedBox(
                             height: 16,
                           ),
@@ -822,107 +237,128 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
         activeApplication.wallets.last.id != -1) {
       activeApplication.wallets.add(Wallet(id: -1));
     }
+
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        return Container(
-          padding: EdgeInsets.only(
-            left: 0,
-            right: 0,
-            top: 20,
-            bottom: 40,
-          ),
-          width: MediaQuery.of(context).size.width,
-          child: Wrap(
-            runSpacing: 20,
-            alignment: WrapAlignment.spaceBetween,
-            children: activeApplication.wallets.map((Wallet wallet) {
-              if (wallet.id != -1) {
-                return FractionallySizedBox(
-                  widthFactor: 0.3,
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                      end: 8.0,
-                      start: 8.0,
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => PaymentPage(
-                              wallet: wallet,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Material(
-                        elevation: 5,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(50),
-                        ),
-                        child: Container(
-                          height: 92,
-                          width: 92,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(50),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: gray.withOpacity(0.1),
-                                blurRadius: 4.0,
-                                spreadRadius: 0.0,
-                                offset: Offset(0.0, 0.0),
-                              )
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Image(
-                              image: AssetImage(
-                                wallet.logo,
+        if (["SN", "CI", "BJ"].contains(currentCoutry)) {
+          return Container(
+            padding: EdgeInsets.only(
+              left: 0,
+              right: 0,
+              top: 20,
+              bottom: 40,
+            ),
+            width: MediaQuery.of(context).size.width,
+            child: Wrap(
+              runSpacing: 20,
+              alignment: WrapAlignment.spaceBetween,
+              children: activeApplication.wallets.map((Wallet wallet) {
+                if (wallet.id != -1) {
+                  return FractionallySizedBox(
+                    widthFactor: 0.3,
+                    child: Container(
+                      padding: const EdgeInsetsDirectional.only(
+                        end: 8.0,
+                        start: 8.0,
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) => PaymentPage(
+                                wallet: wallet,
                               ),
-                              fit: BoxFit.cover,
+                            ),
+                          );
+                        },
+                        child: Material(
+                          elevation: 5,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                          child: Container(
+                            height: 92,
+                            width: 92,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(50),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: gray.withOpacity(0.1),
+                                  blurRadius: 4.0,
+                                  spreadRadius: 0.0,
+                                  offset: Offset(0.0, 0.0),
+                                )
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Image(
+                                image: AssetImage(
+                                  wallet.logo,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              } else {
-                return FractionallySizedBox(
-                  widthFactor: 0.3,
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                      end: 8.0,
-                      start: 8.0,
-                    ),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Material(
-                        elevation: 0,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(50),
-                        ),
-                        child: Container(
-                          height: 92,
-                          width: 92,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(50),
+                  );
+                } else {
+                  return FractionallySizedBox(
+                    widthFactor: 0.3,
+                    child: Container(
+                      padding: const EdgeInsetsDirectional.only(
+                        end: 8.0,
+                        start: 8.0,
+                      ),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Material(
+                          elevation: 0,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                          child: Container(
+                            height: 92,
+                            width: 92,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(50),
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              }
-            }).toList(),
-          ),
-        );
+                  );
+                }
+              }).toList(),
+            ),
+          );
+        } else {
+          return Container(
+            padding: EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 40,
+              bottom: 30,
+            ),
+            width: MediaQuery.of(context).size.width,
+            child: Text(
+              "L'application Box n'est pas disponible dans cette zone!",
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ),
+          );
+        }
       },
     );
   }

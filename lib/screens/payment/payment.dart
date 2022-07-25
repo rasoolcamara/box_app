@@ -503,8 +503,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                           case "ORANGE MONEY CI":
                                             paymentResultMessage =
                                                 await omciService.payment(
-                                                    _phoneController
-                                                        .text); //('0779077285');
+                                                    _phoneController.text);
                                             break;
                                           case "ORANGE MONEY SENEGAL":
                                             paymentResult =
@@ -521,6 +520,8 @@ class _PaymentPageState extends State<PaymentPage> {
                                             print(paymentResult);
                                             break;
                                           case "MOOV CI":
+                                            print("Payment par MOOVCI");
+
                                             paymentResultMessage =
                                                 await moovciService.payment(
                                                     _phoneController.text);

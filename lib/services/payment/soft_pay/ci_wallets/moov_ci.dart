@@ -18,6 +18,7 @@ class MoovCIService {
         "Content-Type": "application/json",
       },
     );
+    print("Payment par MOOVCI");
 
     var body = jsonDecode(response.body);
 

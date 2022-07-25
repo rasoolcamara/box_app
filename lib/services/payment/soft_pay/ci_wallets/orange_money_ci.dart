@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:box_app/app_properties.dart';
 
-
 class OMCIService {
   Future<String> payment(
     String phone,
@@ -23,7 +22,7 @@ class OMCIService {
 
     var body = jsonDecode(response.body);
 
-    print("Payment par EMoney");
+    print("Payment par OMCI");
     print(body);
 
     if (body['success'] == true) {
