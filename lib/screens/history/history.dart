@@ -341,14 +341,14 @@ class _HistoryPageState extends State<HistoryPage> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Text(
-                  _formatCurrencyForList(transaction.amount),
+                  _formatCurrencyForList(num.parse(transaction.amount)),
                   style: TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
                   ),
                 ),
-                transaction.status == "success"
+                transaction.status == "completed"
                     ? Text(
                         "Succès",
                         style: TextStyle(

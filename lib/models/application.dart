@@ -14,6 +14,7 @@ class Application {
   final String testPublicKey;
   final String testPrivateKey;
   final String testToken;
+  // final String masterKey;
   final User user;
   final List<Wallet> wallets;
   final Wallet withdrawWallet;
@@ -34,6 +35,7 @@ class Application {
     this.user,
     this.wallets,
     this.withdrawWallet,
+    // this.masterKey,
   });
 
   factory Application.fromJson(Map<String, dynamic> json) {
@@ -50,6 +52,7 @@ class Application {
         livePrivateKey: json['live_private_key'] as String,
         livePublickey: json['live_public_key'] as String,
         liveToken: json['live_token'] as String,
+        // masterKey: json['master_key'] as String,
         accountNumber: json['account_number'] as String,
         user: User.fromJson(json['user']),
         wallets: walletsFromListJson(json["active_channels"]),

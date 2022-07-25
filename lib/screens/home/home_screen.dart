@@ -88,7 +88,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
         builder: (_, snapshot) {
           if (snapshot.data != null) {
             List<Transactions> transactions = snapshot.data;
-            print(currentCoutry);
+            print(walletsByCountry[currentCoutry].map((e) => e.name));
             return ListView(
               children: <Widget>[
                 Stack(
@@ -215,9 +215,6 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                               ),
                                             ),
                                           ),
-                                          // SizedBox(
-                                          //   width: 30,
-                                          // ),
                                           InkWell(
                                             onTap: () {
                                               Navigator.of(context).push(
@@ -688,7 +685,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                                   child: Image(
                                                     image: AssetImage(
                                                       walletsByCountry[
-                                                              currentCoutry][4]
+                                                              currentCoutry][3]
                                                           .logo,
                                                     ),
                                                     fit: BoxFit.cover,
@@ -712,19 +709,6 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                                   color: Colors.white,
                                                   width: 0.0,
                                                 ),
-                                                // boxShadow: [
-                                                //   BoxShadow(
-                                                //     color: Colors.black12,
-                                                //     blurRadius:
-                                                //         30.0, // soften the shadow
-                                                //     spreadRadius:
-                                                //         1.0, //extend the shadow
-                                                //     offset: Offset(
-                                                //       0.0, // Move to right 10  horizontally
-                                                //       0.0, // Move to bottom 10 Vertically
-                                                //     ),
-                                                //   )
-                                                // ],
                                               ),
                                               child: Image(
                                                 height: 80,
@@ -809,7 +793,9 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                               ),
                               _latestTransactions(
                                 context,
-                                transactions.take(3).toList(),
+                                transactions.length > 3
+                                    ? transactions.take(3).toList()
+                                    : transactions,
                               ),
                             ],
                           ),
@@ -831,6 +817,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
   }
 
   Container _walletsCards(BuildContext context) {
+    
     return Container(
       padding: const EdgeInsets.only(top: 26.0, right: 0.0, left: 0.0),
       width: MediaQuery.of(context).size.width,
@@ -1267,14 +1254,14 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Text(
-                  _formatCurrencyForList(transaction.amount),
+                  _formatCurrencyForList(num.parse(transaction.amount)),
                   style: TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
                   ),
                 ),
-                transaction.status == "success"
+                transaction.status == "completed"
                     ? Text(
                         "Succès",
                         style: TextStyle(

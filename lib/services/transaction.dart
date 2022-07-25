@@ -5,6 +5,8 @@ import 'package:box_app/app_properties.dart';
 
 class TransactionService {
   Future<List<Transactions>> getTransactions(String token) async {
+    print("userId");
+    print(userId);
     http.Response res = await http.get(
       Uri.parse(userURL + 'box/user/$userId/transactions'),
       headers: <String, String>{
@@ -14,7 +16,7 @@ class TransactionService {
     );
 
     print("getTransactions");
-
+    print(json.decode(res.body));
     if (res.statusCode == 200) {
       var body = json.decode(res.body);
 

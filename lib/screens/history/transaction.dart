@@ -116,7 +116,8 @@ class _TransactionPageState extends State<TransactionPage> {
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0, top: 16.0),
                           child: Text(
-                            _formatCurrency(widget.transaction.amount),
+                            _formatCurrency(
+                                num.parse(widget.transaction.amount)),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 28,
@@ -205,7 +206,7 @@ class _TransactionPageState extends State<TransactionPage> {
                                 ),
                               ),
                             ),
-                            subtitle: widget.transaction.status == "success"
+                            subtitle: widget.transaction.status == "completed"
                                 ? Text(
                                     "Succès",
                                     style: TextStyle(

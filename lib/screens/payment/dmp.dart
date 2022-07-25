@@ -624,8 +624,7 @@ class _DmpPageState extends State<DmpPage> {
                                                 num.parse(
                                                     _amountController.text),
                                                 alias,
-                                                // email: _emailController.text,
-                                                // phone: _phoneController.text,
+
                                               );
                                               setState(() {
                                                 _loading = false;

@@ -13,19 +13,18 @@ class ApiDMPService {
     final response = await http.post(
       Uri.parse('https://app.paydunya.com/api/v1/dmp'),
       body: jsonEncode({
-        "phone": activeApplication.user.phone,
         "account_alias": alias,
         "amount": totalAmount,
         'supported_by_business': 0,
-        'service': 'box-app-service',
+        'service': 'box-service-app',
       }),
       headers: <String, String>{
         "Content-Type": "application/json",
-        "Authorization":
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI3MTAwNSwiaXNzIjoiaHR0cHM6XC9cL2FwcC5wYXlkdW55YS5jb21cL2FwaVwvdjFcL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTY0NjY2NTY2MSwiZXhwIjoxOTYyMDI1NjYxLCJuYmYiOjE2NDY2NjU2NjEsImp0aSI6IjYxN2EwZjY4ZjEyNDFjYjVlZWUyNWJmZjc0MGE5NjQzIn0.tHhllRZI1kfx5ZumqfJPOiUrwyVRuVfrfGD7ryzasfY",
-        // "Authorization": "Bearer $activeToken",
+        "Authorization": "Bearer $activeToken",
       },
     );
+    print("response.body");
+    print(response.body);
 
     var body = jsonDecode(response.body);
 

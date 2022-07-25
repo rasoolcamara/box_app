@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 const String userURL =
-    "https://preview56.paydunya.com/api/v1/"; //"http://mon-traiteur-api.test/api/";
+    "https://app.paydunya.com/api/v1/"; //"http://mon-traiteur-api.test/api/";
 
 const String baseURL = "http://3c5a-154-125-164-117.ngrok.io/";
 String invoiceToken = '';
@@ -20,6 +20,7 @@ Map<String, List<Wallet>> walletsByCountry = {
   "BJ": [],
   "BF": [],
   "TG": [],
+  "ML": [],
   "INTERNATIONAL": [],
 };
 
@@ -33,15 +34,16 @@ Map<String, String> walletsLogo = {
   "moov-bj": 'assets/images/logo-part/moov.png',
   "moov-benin": 'assets/images/logo-part/moov.png',
   "moov-ci": 'assets/images/logo-part/moov.png',
+  "mtn-ci": 'assets/images/logo-part/mtn.png',
+  "mtn-bj": 'assets/images/logo-part/mtn.png',
+  "mtn-benin": 'assets/images/logo-part/mtn.png',
+  "moov-ml": 'assets/images/logo-part/moov.png',
   "moov-bf": 'assets/images/logo-part/moov.png',
   "wizall-senegal": 'assets/images/logo-part/wizall.png',
   "orange-money-ci": 'assets/images/logo-part/orange-money.png',
 };
 
 Application activeApplication = Application();
-String appStoreUrl = "https://apps.apple.com/us/app/sendkwe/id1600051085";
-String playStoreUrl =
-    "https://play.google.com/store/apps/details?id=com.rasool.sendkwe";
 
 String paydunyaMasterKey = 'WgedBb3h-KMie-lsNN-XCTj-jMUg1tcPkHs8';
 String paydunyaPrivateKey = 'live_private_LjGl1jBePaFHmJMPQcBsYWoNWgg';

@@ -11,7 +11,7 @@ class Transactions {
   final String customerEmail;
   final String token;
   final String paydunyaRequestToken;
-  final num amount;
+  final String amount;
   final String totalAmount;
   final String date;
   final String status;
@@ -33,6 +33,8 @@ class Transactions {
 
   factory Transactions.fromJson(Map<String, dynamic> json) {
     try {
+      print("json['created_at']['date']");
+      print(json['created_at']);
       return Transactions(
         id: json['id'] as int,
         identifier: json['identifier'] as String,
@@ -41,16 +43,14 @@ class Transactions {
         customerEmail: json['customer_email'] as String,
         token: json['token'] as String,
         paydunyaRequestToken: json['payment_request_token'] as String,
-        wallet:
-            json['payment_method'], // walletsFromSlug(json['payment_method']),
-        amount: json['amount'] as num,
+        wallet: json['payment_method'],
+        amount: json['amount'] as String,
         totalAmount: json['amount_without_fees'] as String,
-        date: json['created_at']['date'] as String,
+        date: json['created_at'] as String,
         status: json['status'] as String,
       );
     } catch (e) {
       print(e);
-
       throw e;
     }
   }

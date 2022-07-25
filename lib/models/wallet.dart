@@ -3,7 +3,7 @@ import 'package:box_app/app_properties.dart';
 class Wallet {
   int id;
   String name;
-  String logo = 'assets/images/logo-part/wave.png';
+  String logo;
   String slug;
   String scope;
   int isActive;
@@ -39,13 +39,12 @@ List<Wallet> walletsFromListJson(List<dynamic> json) {
       Wallet wallet = Wallet.fromJson(item);
       wallet.logo =
           walletsLogo[wallet.slug] ?? "assets/images/logo-part/wave.png";
-      walletsByCountry[wallet.scope.toUpperCase()].add(wallet);
+      if (!walletsByCountry[wallet.scope.toUpperCase()].contains(wallet)) {
+        walletsByCountry[wallet.scope.toUpperCase()].add(wallet);
+      }
       return wallet;
     },
   ).toList();
-
-  // print("walletsByCountry");
-  // print(walletsByCountry);
 
   wallets = wallets.where((Wallet wallet) {
     return wallet.scope == currentCoutry.toLowerCase();
