@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:box_app/app_properties.dart';
+import 'package:box_app/models/application.dart';
 import 'package:box_app/models/user.dart';
 import 'package:box_app/screens/admin/admin.dart';
 import 'package:box_app/screens/bottom_nav_bar.dart';
@@ -53,9 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: FutureBuilder(
         future: applicationServica.getApplication(activeToken, userId),
         builder: (_, snapshot) {
-          print("SnapSHOT");
-          print(snapshot.data);
           if (snapshot.data != null) {
+            print("SnapSHOT");
+            print(snapshot.data);
+            Application app = snapshot.data as Application;
+            print(app.wallets.length);
             return getPage(_currentPage);
           } else {
             return Center(

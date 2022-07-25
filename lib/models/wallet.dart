@@ -39,7 +39,8 @@ List<Wallet> walletsFromListJson(List<dynamic> json) {
       Wallet wallet = Wallet.fromJson(item);
       wallet.logo =
           walletsLogo[wallet.slug] ?? "assets/images/logo-part/wave.png";
-      if (!walletsByCountry[wallet.scope.toUpperCase()].contains(wallet)) {
+      if (walletsByCountry[wallet.scope.toUpperCase()].contains(wallet)) {
+        print("item item");
         walletsByCountry[wallet.scope.toUpperCase()].add(wallet);
       }
       return wallet;

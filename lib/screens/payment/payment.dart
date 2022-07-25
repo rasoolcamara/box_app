@@ -489,21 +489,22 @@ class _PaymentPageState extends State<PaymentPage> {
                                         switch (widget.wallet.name) {
                                           case "FREE MONEY SENEGAL":
                                             paymentResult =
-                                                await freeMoneyService
-                                                    .payment(_phone);
+                                                await freeMoneyService.payment(
+                                                    _phoneController.text);
                                             break;
                                           case "EXPRESSO SN":
                                             paymentResult = await eMoneyService
-                                                .payment(_phone);
+                                                .payment(_phoneController.text);
                                             break;
                                           case "WAVE SENEGAL":
                                             paymentResult = await waveService
-                                                .payment(_phone);
+                                                .payment(_phoneController.text);
                                             break;
                                           case "ORANGE MONEY CI":
                                             paymentResultMessage =
-                                                await omciService
-                                                    .payment('0779077285');
+                                                await omciService.payment(
+                                                    _phoneController
+                                                        .text); //('0779077285');
                                             break;
                                           case "ORANGE MONEY SENEGAL":
                                             paymentResult =
@@ -515,26 +516,27 @@ class _PaymentPageState extends State<PaymentPage> {
                                           case "WIZALL SENEGAL":
                                             // paymentResult = true;
                                             paymentResult = await wizAllService
-                                                .paymentRequest(_phone);
+                                                .paymentRequest(
+                                                    _phoneController.text);
                                             print(paymentResult);
                                             break;
                                           case "MOOV CI":
                                             paymentResultMessage =
-                                                await moovciService
-                                                    .payment(_phone);
+                                                await moovciService.payment(
+                                                    _phoneController.text);
                                             break;
                                           case "MTN CI":
                                             paymentResult = await mtnciService
-                                                .payment(_phone);
+                                                .payment(_phoneController.text);
                                             break;
                                           case "MOOV BENIN":
                                             paymentResultMessage =
-                                                await moovbjService
-                                                    .payment(_phone);
+                                                await moovbjService.payment(
+                                                    _phoneController.text);
                                             break;
                                           case "MTN BENIN":
                                             paymentResult = await mtnbjService
-                                                .payment(_phone);
+                                                .payment(_phoneController.text);
                                             break;
                                           default:
                                         }

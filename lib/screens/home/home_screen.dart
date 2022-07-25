@@ -88,7 +88,6 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
         builder: (_, snapshot) {
           if (snapshot.data != null) {
             List<Transactions> transactions = snapshot.data;
-            print(walletsByCountry[currentCoutry].map((e) => e.name));
             return ListView(
               children: <Widget>[
                 Stack(
@@ -145,7 +144,9 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                             ),
                           ),
                           // _walletsCards(context),
-                          Container(
+                          _walletList(context),
+
+                          /* Container(
                             height: 250,
                             width: MediaQuery.of(context).size.width,
                             padding: const EdgeInsets.only(
@@ -728,7 +729,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                     : Container(),
                               ],
                             ),
-                          ),
+                          ), */
                           SizedBox(
                             height: 16,
                           ),
@@ -816,135 +817,111 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     );
   }
 
-<<<<<<< HEAD
   Widget _walletList(context) {
+    if (activeApplication.wallets.isNotEmpty &&
+        activeApplication.wallets.last.id != -1) {
+      activeApplication.wallets.add(Wallet(id: -1));
+    }
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        return ListView(
-          children: <Widget>[
-            SizedBox(
-              height: 15.0,
-            ),
-            Container(
-              padding: EdgeInsetsDirectional.only(
-                // start: 4,
-                top: 20,
-                bottom: 20,
-=======
-  Container _walletsCards(BuildContext context) {
-    
-    return Container(
-      padding: const EdgeInsets.only(top: 26.0, right: 0.0, left: 0.0),
-      width: MediaQuery.of(context).size.width,
-      height: 240,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ProgressButton(
-                color: Colors.white,
-                progressIndicatorColor: blue,
-                borderRadius: BorderRadius.all(Radius.circular(60)),
-                strokeWidth: 1,
-                child: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        walletsByCountry["Sénégal"][0].logo,
+        return Container(
+          padding: EdgeInsets.only(
+            left: 0,
+            right: 0,
+            top: 20,
+            bottom: 40,
+          ),
+          width: MediaQuery.of(context).size.width,
+          child: Wrap(
+            runSpacing: 20,
+            alignment: WrapAlignment.spaceBetween,
+            children: activeApplication.wallets.map((Wallet wallet) {
+              if (wallet.id != -1) {
+                return FractionallySizedBox(
+                  widthFactor: 0.3,
+                  child: Container(
+                    padding: const EdgeInsetsDirectional.only(
+                      end: 8.0,
+                      start: 8.0,
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => PaymentPage(
+                              wallet: wallet,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Material(
+                        elevation: 5,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                        child: Container(
+                          height: 92,
+                          width: 92,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: gray.withOpacity(0.1),
+                                blurRadius: 4.0,
+                                spreadRadius: 0.0,
+                                offset: Offset(0.0, 0.0),
+                              )
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Image(
+                              image: AssetImage(
+                                wallet.logo,
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ),
-                      fit: BoxFit.fill,
                     ),
                   ),
-                ),
-                onPressed: (AnimationController controller) async {
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => PaymentPage(
-                        wallet: walletsByCountry["Sénégal"][0],
-                      ),
+                );
+              } else {
+                return FractionallySizedBox(
+                  widthFactor: 0.3,
+                  child: Container(
+                    padding: const EdgeInsetsDirectional.only(
+                      end: 8.0,
+                      start: 8.0,
                     ),
-                  );
-                  // controller.forward();
-                },
-              ),
-              ProgressButton(
-                color: Colors.white,
-                progressIndicatorColor: blue,
-                borderRadius: BorderRadius.all(Radius.circular(60)),
-                strokeWidth: 1,
-                child: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        walletsByCountry["Sénégal"][0].logo,
+                    child: InkWell(
+                      onTap: () {},
+                      child: Material(
+                        elevation: 0,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                        child: Container(
+                          height: 92,
+                          width: 92,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50),
+                            ),
+                          ),
+                        ),
                       ),
-                      fit: BoxFit.fill,
                     ),
                   ),
-                ),
-                onPressed: (AnimationController controller) async {
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => PaymentPage(
-                        wallet: walletsByCountry["Sénégal"][0],
-                      ),
-                    ),
-                  );
-                  // controller.forward();
-                },
-              ),
-              ProgressButton(
-                color: Colors.white,
-                progressIndicatorColor: blue,
-                borderRadius: BorderRadius.all(Radius.circular(60)),
-                strokeWidth: 1,
-                child: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        walletsByCountry["Sénégal"][0].logo,
-                      ),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                onPressed: (AnimationController controller) async {
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => PaymentPage(
-                        wallet: walletsByCountry["Sénégal"][0],
-                      ),
-                    ),
-                  );
-                  // controller.forward();
-                },
->>>>>>> fe43440eb48bb423d623b0a5e013930eddd01ebb
-              ),
-              child: Wrap(
-                runSpacing: 10,
-                alignment: WrapAlignment.spaceBetween,
-                children: walletsByCountry[currentCoutry].map((Wallet wallet) {
-                  return FractionallySizedBox(
-                    widthFactor: 0.3,
-                    child: Container(
-                      padding: const EdgeInsetsDirectional.only(end: 16),
-                      child: _buildCard(product, context),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-          ],
+                );
+              }
+            }).toList(),
+          ),
         );
       },
     );
