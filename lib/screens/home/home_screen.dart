@@ -830,283 +830,37 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     );
   }
 
-  Container _walletsCards(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 26.0, right: 0.0, left: 0.0),
-      width: MediaQuery.of(context).size.width,
-      height: 240,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ProgressButton(
-                color: Colors.white,
-                progressIndicatorColor: blue,
-                borderRadius: BorderRadius.all(Radius.circular(60)),
-                strokeWidth: 1,
-                child: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        walletsByCountry["Sénégal"][0].logo,
-                      ),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                onPressed: (AnimationController controller) async {
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => PaymentPage(
-                        wallet: walletsByCountry["Sénégal"][0],
-                      ),
+  Widget _walletList(context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return ListView(
+          children: <Widget>[
+            SizedBox(
+              height: 15.0,
+            ),
+            Container(
+              padding: EdgeInsetsDirectional.only(
+                // start: 4,
+                top: 20,
+                bottom: 20,
+              ),
+              child: Wrap(
+                runSpacing: 10,
+                alignment: WrapAlignment.spaceBetween,
+                children: walletsByCountry[currentCoutry].map((Wallet wallet) {
+                  return FractionallySizedBox(
+                    widthFactor: 0.3,
+                    child: Container(
+                      padding: const EdgeInsetsDirectional.only(end: 16),
+                      child: _buildCard(product, context),
                     ),
                   );
-                  // controller.forward();
-                },
+                }).toList(),
               ),
-              ProgressButton(
-                color: Colors.white,
-                progressIndicatorColor: blue,
-                borderRadius: BorderRadius.all(Radius.circular(60)),
-                strokeWidth: 1,
-                child: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        walletsByCountry["Sénégal"][0].logo,
-                      ),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                onPressed: (AnimationController controller) async {
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => PaymentPage(
-                        wallet: walletsByCountry["Sénégal"][0],
-                      ),
-                    ),
-                  );
-                  // controller.forward();
-                },
-              ),
-              ProgressButton(
-                color: Colors.white,
-                progressIndicatorColor: blue,
-                borderRadius: BorderRadius.all(Radius.circular(60)),
-                strokeWidth: 1,
-                child: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        walletsByCountry["Sénégal"][0].logo,
-                      ),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                onPressed: (AnimationController controller) async {
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => PaymentPage(
-                        wallet: walletsByCountry["Sénégal"][0],
-                      ),
-                    ),
-                  );
-                  // controller.forward();
-                },
-              ),
-            ],
-          ),
-
-          /* SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 240,
-            child: 
-            /* GridView.count(
-              crossAxisCount: 3,
-              primary: false,
-              crossAxisSpacing: 20.0,
-              mainAxisSpacing: 20.0,
-              childAspectRatio: 1.1,
-              children: List.generate(
-                walletsByCountry["Sénégal"].length,
-                (index) {
-                  Wallet wallet = walletsByCountry["Sénégal"][index];
-                  return Container(
-                    padding: const EdgeInsets.only(
-                      left: 10.0,
-                      right: 10.0,
-                      top: 8.0,
-                      bottom: 5.0,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(100)),
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Colors.black12,
-                      //     blurRadius: 1.0, // soften the shadow
-                      //     spreadRadius: 1.0, //extend the shadow
-                      //     offset: Offset(
-                      //       0.0, // Move to right 10  horizontally
-                      //       0.0, // Move to bottom 10 Vertically
-                      //     ),
-                      //   )
-                      // ],
-                    ),
-                    child: ProgressButton(
-                      color: Colors.white,
-                      progressIndicatorColor: blue,
-                      borderRadius: BorderRadius.all(Radius.circular(60)),
-                      strokeWidth: 1,
-                      child: Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              wallet.logo,
-                            ),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                      onPressed: (AnimationController controller) async {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => PaymentPage(
-                              wallet: wallet,
-                            ),
-                          ),
-                        );
-                        // controller.forward();
-                      },
-                    ),
-                  );
-
-                  /* InkWell(
-                    onTap: () async {
-                      if (wallet.name == "Orange Money Sénégal") {
-                        print("On envoi la requete");
-                        final theToken = await sendingSMSService.authCRM();
-
-                        // final result = await oMSNService.sendUssdRequest();
-                        print("The result for OMSN sending sms: \n\n");
-                        print(theToken);
-                        if (theToken != 'null') {
-                          final result = await sendingSMSService.sendSMS(
-                            "+221772948083",
-                            "Paiement avec Orange Money Sénégal sur +221772948083 invoice " +
-                                invoiceToken +
-                                " token",
-                            theToken,
-                          );
-
-                          print("The result for OMSN sending sms: \n\n");
-                          print(result);
-                        }
-
-                        AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.SUCCES,
-                          animType: AnimType.RIGHSLIDE,
-                          headerAnimationLoop: true,
-                          title: 'Alerte',
-                          desc:
-                              'Le paiement OM Sénégal est initié avec succés !',
-                          btnOkOnPress: () {},
-                          btnOkIcon: Icons.done,
-                          btnOkColor: Colors.green,
-                        )..show();
-                      } else if (wallet.name == "WizAll Money") {
-                        print("On lance la requete");
-
-                        final result =
-                            await wizallService.paymentRequest("774731921");
-
-                        print("Le result du paiement par WizAll est: \n");
-                        print(result);
-                        print("Le result du paiement par WizAll est: \n");
-                      } else if (wallet.name == "E Money") {
-                        print("On lance la requete");
-
-                        final result = await eMoneyService.payment("774731921");
-
-                        print("Le result du paiement par Expresso est: \n");
-                        print(result);
-                        print("Le result du paiement par Expresso est: \n");
-                        AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.SUCCES,
-                          animType: AnimType.RIGHSLIDE,
-                          headerAnimationLoop: true,
-                          title: 'Alerte',
-                          desc: 'Le paiement E-Money est initié avec succés !',
-                          btnOkOnPress: () {},
-                          btnOkIcon: Icons.done,
-                          btnOkColor: Colors.green,
-                        )..show();
-                      } else if (wallet.name == "Free Money") {
-                        print("On lance la requete");
-
-                        final result =
-                            await freeMoneyService.payment("768166591");
-
-                        print("Le result du paiement par Free Money est: \n");
-                        print(result);
-                        print("Le result du paiement par Free Money est: \n");
-
-                        if (result) {
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.SUCCES,
-                            animType: AnimType.RIGHSLIDE,
-                            headerAnimationLoop: true,
-                            title: 'Merci',
-                            desc:
-                                'Le paiement FreeMoney est initié avec succés !',
-                            btnOkOnPress: () {},
-                            btnOkIcon: Icons.done,
-                            btnOkColor: Colors.green,
-                          )..show();
-                        } else {
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.ERROR,
-                            animType: AnimType.RIGHSLIDE,
-                            headerAnimationLoop: true,
-                            title: 'Alerte',
-                            desc:
-                                "Le paiement FreeMoney n'a pas pu être initié, vérifiez le solde du numéro payeur!",
-                            btnOkOnPress: () {},
-                            btnOkIcon: Icons.cancel,
-                            btnOkColor: Colors.red,
-                          )..show();
-                        }
-                      }
-                    },
-                    child: itemCard(
-                      image: wallet.logo,
-                      title: wallet.name,
-                    ),
-                  ); */
-                },
-              ),
-            ), */
-          ), */
-        ],
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 
