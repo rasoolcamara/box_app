@@ -46,7 +46,7 @@ class _AppState extends State<App> {
 
     Placemark place = placemarks[0];
 
-    currentCoutry = place.isoCountryCode;
+    // currentCoutry = place.isoCountryCode;
     // print("L'adresse");
 
     // print(place);

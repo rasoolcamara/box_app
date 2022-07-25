@@ -16,8 +16,8 @@ class ApplicationService {
           "Authorization": "Bearer $token"
         });
 
-    // print("RESPONSE");
-    // print(response.body);
+    print("RESPONSE");
+    print(response.body);
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
@@ -72,8 +72,8 @@ class ApplicationService {
     final response = await http.post(
       Uri.parse(userURL + 'authenticate'),
       body: jsonEncode({
-        "email": "collect@paydunya.com",
-        "password": "123456789",
+        "email": "waitingforburgers@gmail.com",
+        "password": "db366adce8cbc0ced1a92779784a8fa8",
       }),
       headers: <String, String>{
         "Content-Type": "application/json",
@@ -112,8 +112,8 @@ class ApplicationService {
     final response = await http.post(
       Uri.parse(userURL + 'authenticate'),
       body: jsonEncode({
-        "email": "doro.gueye@paydunya.com",
-        "password": "123456789",
+        "email": "waitingforburgers@gmail.com",
+        "password": "db366adce8cbc0ced1a92779784a8fa8",
       }),
       headers: <String, String>{
         "Content-Type": "application/json",

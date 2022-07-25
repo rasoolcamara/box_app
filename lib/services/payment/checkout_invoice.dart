@@ -18,22 +18,23 @@ class PaydunyaService {
         "name": activeApplication.name,
         "phone": activeApplication.user.phoneWithIndicatif,
       },
-      "custom_data": {
-        "transaction_form": "box_app",
-      }
+      "custom_data": "box-service-app",
     };
 
     print("Génération du checkout invoice");
-    print(invoice);
+    print(activeApplication.user.masterKey);
+    print(activeApplication.livePrivateKey);
+
+    print(activeApplication.liveToken);
 
     final response = await http.post(
       Uri.parse('https://app.paydunya.com/api/v1/checkout-invoice/create'),
       body: jsonEncode(invoice),
       headers: <String, String>{
         "Content-Type": "application/json",
-        "PAYDUNYA-MASTER-KEY": paydunyaMasterKey,
-        "PAYDUNYA-PRIVATE-KEY": paydunyaPrivateKey,
-        'PAYDUNYA-TOKEN': paydunyaToken
+        "PAYDUNYA-MASTER-KEY": activeApplication.user.masterKey,
+        "PAYDUNYA-PRIVATE-KEY": activeApplication.livePrivateKey,
+        'PAYDUNYA-TOKEN': activeApplication.liveToken
       },
     );
 

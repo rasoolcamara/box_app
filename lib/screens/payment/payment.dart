@@ -49,6 +49,8 @@ class _PaymentPageState extends State<PaymentPage> {
   final GlobalKey<FormState> _paymentFormKey = GlobalKey<FormState>();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
+  final TextEditingController _codeController = TextEditingController();
+
   final List<String> errors = [];
   String _countryCode = "+221";
 
@@ -352,6 +354,110 @@ class _PaymentPageState extends State<PaymentPage> {
                                   ],
                                 ),
                               ),
+                              widget.wallet.name == "ORANGE MONEY SENEGAL"
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 25.0, right: 25.0, top: 25.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            "Code d'autorisation",
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Container(
+                                            height: 52.5,
+                                            decoration: BoxDecoration(
+                                              color: Colors.transparent,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(5.0),
+                                              ),
+                                              border: Border.all(
+                                                color: Colors.black,
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(0.0),
+                                              child: Theme(
+                                                data: ThemeData(
+                                                    hintColor:
+                                                        Colors.transparent),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    left: 0.0,
+                                                  ),
+                                                  child: TextFormField(
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black,
+                                                    ),
+                                                    textAlign: TextAlign.start,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    autocorrect: false,
+                                                    autofocus: false,
+                                                    controller: _codeController,
+                                                    decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      contentPadding:
+                                                          EdgeInsets.only(
+                                                        left: 20.0,
+                                                        bottom: 16,
+                                                      ),
+                                                      filled: true,
+                                                      floatingLabelBehavior:
+                                                          FloatingLabelBehavior
+                                                              .never,
+                                                      fillColor:
+                                                          Colors.transparent,
+                                                      labelText: '',
+                                                      hintStyle: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: Colors.black,
+                                                      ),
+                                                      labelStyle: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            "Taper #144#391*code_secret",
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black,
+                                            ),
+                                            textAlign: TextAlign.right,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Container(),
 
                               // FormError(errors: errors),
                               Padding(
@@ -375,7 +481,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                         var paymentResult = false;
                                         var paymentResultMessage = "";
 
-                                        // print(_phoneController.text);
+                                        print(_phoneController.text);
 
                                         var _phone = _countryCode +
                                             _phoneController.text;
@@ -398,6 +504,13 @@ class _PaymentPageState extends State<PaymentPage> {
                                             paymentResultMessage =
                                                 await omciService
                                                     .payment('0779077285');
+                                            break;
+                                          case "ORANGE MONEY SENEGAL":
+                                            paymentResult =
+                                                await omsnService.payment(
+                                              _phoneController.text,
+                                              _codeController.text,
+                                            );
                                             break;
                                           case "WIZALL SENEGAL":
                                             // paymentResult = true;
@@ -493,7 +606,11 @@ class _PaymentPageState extends State<PaymentPage> {
                                                             height: 24,
                                                           ),
                                                           Text(
-                                                            'Veuillez demander à votre client de finaliser le paiement sur son téléphone!',
+                                                            widget.wallet
+                                                                        .name !=
+                                                                    "ORANGE MONEY SENEGAL"
+                                                                ? 'Veuillez demander à votre client de finaliser le paiement sur son téléphone!'
+                                                                : 'Transaction complètée avec succès',
                                                             style: TextStyle(
                                                               fontFamily:
                                                                   "Roboto",
@@ -1042,6 +1159,7 @@ class _PaymentPageState extends State<PaymentPage> {
   void dispose() {
     _phoneController.dispose();
     _amountController.dispose();
+    _codeController.dispose();
     super.dispose();
   }
 }
